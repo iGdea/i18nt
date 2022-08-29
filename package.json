@@ -1,0 +1,25 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "ls": "lerna ls",
+    "pub": "lerna version",
+    "pub2": "lerna publish from-package -y",
+    "build": "lerna run build",
+    "watch": "lerna run watch --",
+    "test": "lerna run test --",
+    "test-cov": "nyc --reporter=lcov --reporter=text-summary lerna run test",
+    "test-build": "lerna run test-build --",
+    "test-e2e": "lerna run test-e2e --",
+    "test-e2e-dev": "lerna run test-e2e-dev --",
+    "test-e2e-sauce": "lerna run test-e2e-sauce --"
+  },
+  "devDependencies": {
+    "lerna": "^5.4.3",
+    "nyc": "^15.1.0"
+  }
+}
