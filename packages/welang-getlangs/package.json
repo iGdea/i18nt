@@ -1,0 +1,41 @@
+{
+  "name": "welang-getlangs",
+  "version": "0.0.0",
+  "description": "Getlangs of welang",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "mocha dist/test/test_*.js",
+    "test-e2e": "karma start --",
+    "test-e2e-dev": "karma start --auto-watch --no-single-run --browsers=Chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/iGdea/welang.git",
+    "directory": "packages/welang-getlangs"
+  },
+  "keywords": [
+    "i18n",
+    "welang",
+    "getlangs"
+  ],
+  "author": "Bacra Woo <bacra.woo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iGdea/welang/issues"
+  },
+  "homepage": "https://github.com/iGdea/welang/tree/master/packages/welang-getlangs",
+  "devDependencies": {
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.6.1",
+    "cross-env": "^5.2.0",
+    "expect.js": "^0.3.1",
+    "karma": "^3.1.1",
+    "karma-config-brcjs": "^1.1.1",
+    "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
+    "typescript": "^4.3.2"
+  }
+}

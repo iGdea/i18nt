@@ -1,0 +1,8 @@
+karam.conf.js
+
+.*
+
+test
+coverage
+benchmark
+docs
