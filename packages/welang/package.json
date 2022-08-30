@@ -8,10 +8,7 @@
     "build": "tsc",
     "watch": "tsc --watch",
     "bench": "for i in dist/benchmark/*.js; do echo $i; node $i; done",
-    "test": "mocha dist/test/test_*.js",
-    "test-e2e": "karma start --",
-    "test-e2e-dev": "karma start --auto-watch --no-single-run --browsers=Chrome",
-    "test-e2e-sauce": "karma start -- sauce"
+    "test": "mocha dist/test/test_*.js"
   },
   "repository": {
     "type": "git",
@@ -39,8 +36,6 @@
     "@types/mocha": "^8.2.2",
     "benchmark": "^2.1.4",
     "expect.js": "^0.3.1",
-    "karma": "^3.0.0",
-    "karma-config-brcjs": "^1.1.0",
     "mocha": "^5.2.0",
     "typescript": "^4.3.2"
   }
