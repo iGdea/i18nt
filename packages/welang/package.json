@@ -2,8 +2,8 @@
   "name": "welang",
   "version": "0.0.0",
   "description": "welang",
-  "main": "dist/welang.js",
-  "types": "dist/welang.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",

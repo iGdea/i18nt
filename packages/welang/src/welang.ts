@@ -16,12 +16,12 @@ interface WELANGTaggedTemplate {
     (options: WELANGOptions): WELANGTaggedTemplateHandler;
 }
 
-type I18NGeneratorOptions = {
+export type I18NGeneratorOptions = {
     getlangs?: GetLangs,
     encoders?: Encoders,
 };
 
-interface WELANGHandler {
+export interface WELANGHandler {
     (msg: string, tpldata: TypeData[], options?:WELANGOptions): string;
     (msg: string, subkey: string): string;
     (msg: string, options: WELANGOptions): string;
@@ -92,26 +92,4 @@ export function welang(translateData: TranslateData, options?: I18NGeneratorOpti
     }
 
     return welang;
-}
-
-
-export function initWelang(options: I18NGeneratorOptions) {
-    let defaultOptions: I18NGeneratorOptions = mergeOptions({}, options);
-
-    return function(translateData: TranslateData, options?: I18NGeneratorOptions): WELANGHandler {
-        return welang(translateData, options ? mergeOptions(defaultOptions, options) : undefined);
-    };
-}
-
-
-function mergeOptions(opt1: I18NGeneratorOptions, opt2: I18NGeneratorOptions) {
-    return {
-        ...opt1,
-        ...opt2,
-        encoders: {
-            ...encoders,
-            ...opt1.encoders,
-            ...opt2.encoders,
-        },
-    };
 }
