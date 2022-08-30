@@ -38,7 +38,7 @@ export const fromWebNavigator: GetLangsByKey = function(key) {
     return lang || '';
 }
 
-const genFromWebCookie = function(cookieName: string) {
+export function genFromWebCookie(cookieName: string) {
     const reg = genCookieRegExp(cookieName);
 
     const fromWeCookie: GetLangsByKey = (key) => {
@@ -85,9 +85,3 @@ export function genGetLangsForD2(
         }
     };
 }
-
-
-
-export const genGetLangs = {
-    genFromWebCookie,
-};
