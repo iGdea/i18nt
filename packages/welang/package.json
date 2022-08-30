@@ -1,6 +1,6 @@
 {
   "name": "welang",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "welang",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/iGdea/welang/tree/master/packages/welang",
   "dependencies": {
-    "welang-getlangs": "^0.0.0",
-    "htmlyer": "^1.0.1"
+    "htmlyer": "^1.0.1",
+    "welang-getlangs": "^1.0.0"
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.0",

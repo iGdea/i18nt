@@ -1,6 +1,6 @@
 {
   "name": "welang-getlangs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Getlangs of welang",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
