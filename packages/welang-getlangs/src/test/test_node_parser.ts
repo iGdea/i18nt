@@ -1,4 +1,4 @@
-const expect = require('expect.js');
+import expect from 'expect.js';
 
 import type { ClientRequest } from 'http';
 import { parseNodeAcceptLanguage, genParser } from '../lib/node-parser';

@@ -1,5 +1,5 @@
-const expect = require('expect.js');
-const Domain = require('domain');
+import expect from 'expect.js';
+import Domain from 'domain';
 
 import { fromProcessDomain } from '../lib/getlangs';
 
@@ -8,7 +8,8 @@ describe('#getlangs', () => {
         const dm = Domain.create();
 
         dm.run(() => {
-            dm.__i18nc__ = 'zh-tw,cht';
+            (dm as any).__i18nc__ = 'zh-tw,cht';
+
             expect(fromProcessDomain('__i18nc__')).to.be('zh-tw,cht');
             expect(fromProcessDomain('__i18nc__')).to.be('zh-tw,cht');
         });
