@@ -1,5 +1,5 @@
-i18nt
-======
+i18nt-gen
+=========
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][npm-url]
@@ -8,24 +8,24 @@ i18nt
 生成翻译函数
 # Install
 ```
-npm install i18nt --save
+npm install i18nt-gen --save
 ```
 
 # Usage
 
 ```javascript
-const { i18nt } = require('i18nt');
+const { i18nt } = require('i18nt-gen');
 const i18n = i18nt(translateData);
 
 i18n('中文');   // chinese
 i18n('中文', 'short');   // zh
 
 i18n('我是%s', ['Bacra']);    // I‘m Bacra
-i18n('我是%s', ['Bacra'], { langs: 'hk' });    // 我是Bacra
+i18n('我是%s', ['Bacra'], { language: 'hk' });    // 我是Bacra
 
 const username = 'Bacra';
 i18n.t`我是${username}`  // I‘m Bacra
-i18n.t({ langs: 'hk' })`我是${username}`  // 我是Bacra
+i18n.t({ language: 'hk' })`我是${username}`  // 我是Bacra
 
 ```
 
