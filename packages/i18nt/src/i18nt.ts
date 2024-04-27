@@ -25,7 +25,7 @@ export type I18NGeneratorOptions = {
 
 export interface I18NHandler {
   (msg: string, tpldata: TypeDataItem[], options?: I18NOptions): string;
-  (msg: string, subkey: string): string;
+  (msg: string, subkey: string, options?: Omit<I18NFullOptions, 'subkey'>): string;
   (msg: string, options: I18NFullOptions): string;
   (msg: string): string;
 
@@ -58,7 +58,9 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
 
     if (arg2) {
       if (arg2.split) {
-        options = { subkey: arg2 };
+        options = arg3
+          ? { subkey: arg2 }
+          : { ...arg3, subkey: arg2 };
       } else if (Array.isArray(arg2)) {
         tpldata = arg2;
       } else {
@@ -97,4 +99,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
 
 // test
 // const i18n = i18nt({});
-// i18n('sssss', 'substype');
+// i18n('sssss', 'substype', {
+//   // subkey: '1111',
+//   encode: 'jsEncode',
+// });

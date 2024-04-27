@@ -41,20 +41,36 @@ export type FullTypeData = TypeDataItem[] | {
   [key: string]: TypeDataItem,
 };
 
-export type I18NOptions = {
+export interface I18NOptions {
+  /**
+   * 针对语言的特殊处理key
+   */
   subkey?: string,
+
+  /**
+   * 指定翻译语言，可以有多个值。不自动从环境中获取
+   */
   language?: string,
+
+  /**
+   * 非变量默认使用的编码方式
+   */
   encode?: EncoderType,
+
+  /**
+   * 强制匹配语言，如果没有命中，则直接返回空字符串，不返回默认语言
+   */
   forceMatch?: boolean,
 };
 
-export type I18NFullOptions = {
-  subkey?: string,
-  language?: string,
-  encode?: EncoderType,
-  forceMatch?: boolean,
+
+export interface I18NFullOptions extends I18NOptions {
+  /**
+   * 翻译使用的变量
+   */
   tpldata?: FullTypeData,
 };
+
 
 export type I18NInstance = {
   cache: TranslateCache,
@@ -131,9 +147,12 @@ export function translate(
 
       if (index % 2) {
         let tplVal = isTplDataArr
+          // 如果是数组，则只支持数字index
           ? (msg ? tpldata[+msg] : tpldata[replaceIndex++])
+          // 如果是obj，则只支持key
           : (msg ? tpldata[msg] : undefined);
 
+        // 处理encode问题
         const tplValEncode = tplVal && (tplVal as TypeDataItemWithOptions).encode;
         if (tplValEncode === true || tplValEncode === false) {
           tplVal = (tplVal as TypeDataItemWithOptions).text;
