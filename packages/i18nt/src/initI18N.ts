@@ -9,7 +9,7 @@ import {
 } from './i18nt';
 
 
-export function initI18N(options: I18NGeneratorOptions) {
+export function initI18N(options: I18NGeneratorOptions): typeof i18nt {
   let defaultOptions: I18NGeneratorOptions = mergeOptions({}, options);
 
   return function (translateData: TranslateData, options?: I18NGeneratorOptions): I18NHandler {
