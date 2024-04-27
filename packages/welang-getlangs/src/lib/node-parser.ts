@@ -3,39 +3,39 @@
  */
 
 import {
-    getLangsFromCookie,
-    genCookieRegExp,
+  getLangsFromCookie,
+  genCookieRegExp,
 } from './cookie-utils';
 
 import type { ClientRequest } from 'http';
 
 type NodeReqParse = (req: ClientRequest) => string;
 
-export const parseNodeAcceptLanguage:NodeReqParse = function(req) {
-    // zh,en;q=0.9,zh-CN;q=0.8
-    let header = req.getHeader('Accept-Language');
-    if (header) {
-        const lang = (header + '').split(',')
-            .map(v => v.split(';')[0])
-            .join(',');
+export const parseNodeAcceptLanguage: NodeReqParse = function (req) {
+  // zh,en;q=0.9,zh-CN;q=0.8
+  let header = req.getHeader('Accept-Language');
+  if (header) {
+    const lang = (header + '').split(',')
+      .map(v => v.split(';')[0])
+      .join(',');
 
-        return lang.toLowerCase().replace(/-/g, '_');
-    }
+    return lang.toLowerCase().replace(/-/g, '_');
+  }
 
-    return '';
+  return '';
 }
 
 function genParseNodeCookie(cookieName: string) {
-    const reg = genCookieRegExp(cookieName);
+  const reg = genCookieRegExp(cookieName);
 
-    const func:NodeReqParse = (req) => {
-        const cookie = req.getHeader('Cookie');
-        return cookie && getLangsFromCookie('' + cookie, reg) || '';
-    };
+  const func: NodeReqParse = (req) => {
+    const cookie = req.getHeader('Cookie');
+    return cookie && getLangsFromCookie('' + cookie, reg) || '';
+  };
 
-    return func;
+  return func;
 }
 
 export const genParser = {
-    genParseNodeCookie,
+  genParseNodeCookie,
 };
