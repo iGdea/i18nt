@@ -5,14 +5,14 @@ import {
   i18nt,
 
   I18NGeneratorOptions,
-  i18ntHandler,
+  I18NHandler,
 } from './i18nt';
 
 
 export function initI18N(options: I18NGeneratorOptions) {
   let defaultOptions: I18NGeneratorOptions = mergeOptions({}, options);
 
-  return function (translateData: TranslateData, options?: I18NGeneratorOptions): i18ntHandler {
+  return function (translateData: TranslateData, options?: I18NGeneratorOptions): I18NHandler {
     return i18nt(translateData, options ? mergeOptions(defaultOptions, options) : defaultOptions);
   };
 }

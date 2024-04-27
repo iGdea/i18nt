@@ -21,7 +21,7 @@ export type I18NGeneratorOptions = {
   encoders?: Encoders,
 };
 
-export interface i18ntHandler {
+export interface I18NHandler {
   (msg: string, tpldata: TypeData[], options?: I18NOptions): string;
   (msg: string, subkey: string): string;
   (msg: string, options: I18NOptions): string;
@@ -34,7 +34,7 @@ export interface i18ntHandler {
 };
 
 
-export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptions): i18ntHandler {
+export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptions): I18NHandler {
   const myEncoders = options?.encoders
     ? { ...encoders, ...options.encoders }
     : encoders;
@@ -47,7 +47,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     encoders: myEncoders,
   };
 
-  const i18nt = <i18ntHandler>function (msg: string, arg2: any, arg3: any): string {
+  const i18nt = <I18NHandler>function (msg: string, arg2: any, arg3: any): string {
     if (!msg) return msg;
     // const [arg2, arg3] = args;
 
