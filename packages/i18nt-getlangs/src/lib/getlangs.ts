@@ -12,7 +12,7 @@ import {
 type GetLangsByKey = (key: string) => string;
 
 export const fromProcessDomain: GetLangsByKey = function (key) {
-  const dm = process.domain as any;
+  const dm = (process as any).domain;
   const val = dm && dm[key];
   return val ? '' + val : '';
 }
