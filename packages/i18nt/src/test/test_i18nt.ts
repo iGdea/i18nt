@@ -4,7 +4,6 @@ import translateData from '../benchmark/lib/translate_data';
 import {
   i18nt,
   initI18N,
-  EncoderType,
 } from '../';
 
 
@@ -98,7 +97,7 @@ describe('#i18nt', () => {
       });
 
       const username = 'Bacra';
-      const key = i18n.t({ encode: EncoderType.urlEncode });
+      const key = i18n.t({ encode: 'urlEncode' });
 
       expect(key`你好，${username}`).to.be('en%3AHello%2C%20Bacra');
     });

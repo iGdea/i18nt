@@ -1,7 +1,6 @@
 import type { GetLangs } from './getlangs';
 import {
   Encoders,
-  EncoderType,
   Encoder,
 } from './encoders';
 
@@ -55,7 +54,7 @@ export interface I18NOptions {
   /**
    * 非变量默认使用的编码方式
    */
-  encode?: EncoderType,
+  encode?: string | Encoder,
 
   /**
    * 强制匹配语言，如果没有命中，则直接返回空字符串，不返回默认语言
@@ -92,7 +91,11 @@ export function translate(
 
   if (options) {
     if (options.language) langs = options.language;
-    if (options.encode) defEncode = encoders[options.encode];
+    if (options.encode) {
+      defEncode = typeof options.encode === 'function'
+        ? options.encode
+        : encoders[options.encode];
+    }
   }
 
   if (!langs) langs = getlangs(cache);
