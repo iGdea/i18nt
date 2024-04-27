@@ -10,10 +10,10 @@ import {
 
 import { encoders, Encoders } from './lib/encoders';
 
-type i18ntTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeData[]) => string;
-interface i18ntTaggedTemplate {
+type I18NTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeData[]) => string;
+interface I18NTaggedTemplate {
   (strs: TemplateStringsArray, ...args: TypeData[]): string;
-  (options: I18NOptions): i18ntTaggedTemplateHandler;
+  (options: I18NOptions): I18NTaggedTemplateHandler;
 }
 
 export type I18NGeneratorOptions = {
@@ -29,12 +29,10 @@ export interface i18ntHandler {
 
   // 性能太差，单独出函数
   // (strs: TemplateStringsArray, ...args: TypeData[]): string;
-  // (options: I18NOptions): i18ntTaggedTemplate;
-  t: i18ntTaggedTemplate,
+  // (options: I18NOptions): I18NTaggedTemplate;
+  t: I18NTaggedTemplate,
 };
 
-
-const GlobalTempI18NOptions: I18NOptions = { subkey: undefined };
 
 export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptions): i18ntHandler {
   const myEncoders = options?.encoders
@@ -58,8 +56,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
 
     if (arg2) {
       if (arg2.split) {
-        GlobalTempI18NOptions.subkey = arg2;
-        options = GlobalTempI18NOptions;
+        options = { subkey: arg2 };
       } else if (Array.isArray(arg2)) {
         tpldata = arg2;
       } else {
@@ -70,7 +67,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     return translate(instance, '' + msg, tpldata, options);
   }
 
-  i18nt.t = <i18ntTaggedTemplate>function (strs: any, ...args: TypeData[]) {
+  i18nt.t = <I18NTaggedTemplate>function (strs: any, ...args: TypeData[]) {
     if (strs.raw) {
       if (strs.length === 1) {
         return translate(instance, strs[0]);
@@ -80,7 +77,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     } else {
       const options: I18NOptions = strs.split ? { subkey: strs } : strs;
 
-      const func: i18ntTaggedTemplateHandler = (strs, ...args) => {
+      const func: I18NTaggedTemplateHandler = (strs, ...args) => {
         if (strs.length === 1) {
           return translate(instance, strs[0], undefined, options);
         } else {
@@ -93,3 +90,8 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
 
   return i18nt;
 }
+
+
+// test
+// const i18n = i18nt({});
+// i18n('sssss', 'substype');
