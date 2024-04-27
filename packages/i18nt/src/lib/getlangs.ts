@@ -1,6 +1,6 @@
 import { getlangs as Getlangs } from 'i18nt-getlangs';
 
-export type GetLangs = (data: Object) => string;
+export type GetLangs = (data: Object) => string | undefined;
 
 const getlangs4browser = Getlangs.genFromWebCookie('__i18nt__');
 const getlangs4node = Getlangs.fromProcessDomain;
