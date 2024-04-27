@@ -37,7 +37,7 @@ export type TranslateCache = {
   languageIndexs?: number[],
 };
 
-type BaseTypeData = string | undefined;
+type BaseTypeData = string | number | undefined;
 type TypeDataWithOptions = {
   text: BaseTypeData,
   encode: boolean,
