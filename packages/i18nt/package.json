@@ -1,6 +1,6 @@
 {
   "name": "i18nt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "i18n template func",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/i18nt",
   "dependencies": {
     "htmlyer": "^1.0.1",
-    "i18nt-getlangs": "^1.0.0"
+    "i18nt-getlangs": "^1.1.0"
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.0",
