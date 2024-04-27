@@ -32,14 +32,34 @@ describe('#i18nt', () => {
     expect(i18n('上午好')).to.be('en:Good morning');
   });
 
-  it('#vars', () => {
-    const i18n = i18nt(translateData, {
-      getlangs: () => 'en',
+  describe('#tpldata', () => {
+    it('#args: array', () => {
+      const i18n = i18nt(translateData, {
+        getlangs: () => 'en',
+      });
+
+      expect(i18n('你好，%s', ['Bacra'])).to.be('en:Hello, Bacra');
+      expect(i18n('你好，%s')).to.be('en:Hello, %s');
+      expect(i18n('你好，%s', [])).to.be('en:Hello, ');
     });
 
-    expect(i18n('你好，%s', ['Bacra'])).to.be('en:Hello, Bacra');
-    expect(i18n('你好，%s')).to.be('en:Hello, %s');
-    expect(i18n('你好，%s', [])).to.be('en:Hello, ');
+    it('#args: options-array', () => {
+      const i18n = i18nt(translateData, {
+        getlangs: () => 'en',
+      });
+
+      expect(i18n('你好，%s', { tpldata: ['Bacra'] })).to.be('en:Hello, Bacra');
+      expect(i18n('你好，%s', { tpldata: [] })).to.be('en:Hello, ');
+    });
+
+    it('#args: options-map', () => {
+      const i18n = i18nt(translateData, {
+        getlangs: () => 'en',
+      });
+
+      expect(i18n('你好，%{name}', { tpldata: { name: 'Bacra' } })).to.be('en:Hello, Bacra');
+      expect(i18n('你好，%{name}', { tpldata: {} })).to.be('en:Hello, ');
+    });
   });
 
   it('#subkey', () => {
@@ -87,9 +107,5 @@ describe('#i18nt', () => {
 
 
     expect(i18n('上午好')).to.be('hk:早安');
-  });
-
-  describe('#options', () => {
-    it('#langs', () => { });
   });
 });

@@ -5,7 +5,7 @@ import {
   Encoder,
 } from './encoders';
 
-const MSG_REP_REG = /%\{(\d+)\}|%s|%p|%\{.+?\}/g;
+const MSG_REP_REG = /%\{(.+?)\}|%s|%p/g;
 
 type DBLangs = string[];
 type TranslateResult = string | undefined | null;
@@ -24,26 +24,37 @@ export type TranslateData = {
   },
 };
 
-
-export type I18NOptions = {
-  subkey?: string,
-  langs?: string,
-  encode?: EncoderType,
-  forceMatch?: boolean,
-};
-
-export type TranslateCache = {
+type TranslateCache = {
   language?: string,
   languageIndexs?: number[],
 };
 
-type BaseTypeData = string | number | undefined;
-type TypeDataWithOptions = {
-  text: BaseTypeData,
+type BaseTypeDataItem = string | number | undefined;
+type TypeDataItemWithOptions = {
+  text: BaseTypeDataItem,
   encode: boolean,
 };
 
-export type TypeData = BaseTypeData | TypeDataWithOptions;
+export type TypeDataItem = BaseTypeDataItem | TypeDataItemWithOptions;
+
+export type FullTypeData = TypeDataItem[] | {
+  [key: string]: TypeDataItem,
+};
+
+export type I18NOptions = {
+  subkey?: string,
+  language?: string,
+  encode?: EncoderType,
+  forceMatch?: boolean,
+};
+
+export type I18NFullOptions = {
+  subkey?: string,
+  language?: string,
+  encode?: EncoderType,
+  forceMatch?: boolean,
+  tpldata?: FullTypeData,
+};
 
 export type I18NInstance = {
   cache: TranslateCache,
@@ -57,14 +68,14 @@ export function translate(
   { translateData, cache, getlangs, encoders }: I18NInstance,
 
   msg: string,
-  tpldata?: TypeData[],
+  tpldata?: FullTypeData,
   options?: I18NOptions,
 ): string {
   let langs: string | undefined;
   let defEncode: Encoder | undefined;
 
   if (options) {
-    if (options.langs) langs = options.langs;
+    if (options.language) langs = options.language;
     if (options.encode) defEncode = encoders[options.encode];
   }
 
@@ -112,16 +123,20 @@ export function translate(
 
   // 使用split性能比replace更好
   let replaceIndex = 0;
+  const isTplDataArr = Array.isArray(tpldata);
+
   return msg.split(MSG_REP_REG)
     .map((msg, index) => {
       let encode = defEncode;
 
       if (index % 2) {
-        let tplVal = msg ? tpldata[+msg] : tpldata[replaceIndex++];
+        let tplVal = isTplDataArr
+          ? (msg ? tpldata[+msg] : tpldata[replaceIndex++])
+          : (msg ? tpldata[msg] : undefined);
 
-        const tplValEncode = tplVal && (tplVal as TypeDataWithOptions).encode;
+        const tplValEncode = tplVal && (tplVal as TypeDataItemWithOptions).encode;
         if (tplValEncode === true || tplValEncode === false) {
-          tplVal = (tplVal as TypeDataWithOptions).text;
+          tplVal = (tplVal as TypeDataItemWithOptions).text;
           if (tplValEncode === false) encode = undefined;
         }
 

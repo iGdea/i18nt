@@ -2,17 +2,19 @@ import { getlangs, GetLangs } from './lib/getlangs';
 import {
   translate,
 
-  TypeData,
+  TypeDataItem,
+  FullTypeData,
   TranslateData,
   I18NOptions,
+  I18NFullOptions,
   I18NInstance
 } from './lib/translate';
 
 import { encoders, Encoders } from './lib/encoders';
 
-type I18NTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeData[]) => string;
+type I18NTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeDataItem[]) => string;
 interface I18NTaggedTemplate {
-  (strs: TemplateStringsArray, ...args: TypeData[]): string;
+  (strs: TemplateStringsArray, ...args: TypeDataItem[]): string;
   (options: I18NOptions): I18NTaggedTemplateHandler;
 }
 
@@ -22,13 +24,13 @@ export type I18NGeneratorOptions = {
 };
 
 export interface I18NHandler {
-  (msg: string, tpldata: TypeData[], options?: I18NOptions): string;
+  (msg: string, tpldata: TypeDataItem[], options?: I18NOptions): string;
   (msg: string, subkey: string): string;
-  (msg: string, options: I18NOptions): string;
+  (msg: string, options: I18NFullOptions): string;
   (msg: string): string;
 
   // 性能太差，单独出函数
-  // (strs: TemplateStringsArray, ...args: TypeData[]): string;
+  // (strs: TemplateStringsArray, ...args: TypeDataItem[]): string;
   // (options: I18NOptions): I18NTaggedTemplate;
   t: I18NTaggedTemplate,
 };
@@ -51,7 +53,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     if (!msg) return msg;
     // const [arg2, arg3] = args;
 
-    let tpldata: TypeData[] | undefined,
+    let tpldata: FullTypeData | undefined,
       options: I18NOptions | undefined = arg3;
 
     if (arg2) {
@@ -61,13 +63,14 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
         tpldata = arg2;
       } else {
         options = arg2;
+        tpldata = arg2.tpldata;
       }
     }
 
     return translate(instance, '' + msg, tpldata, options);
   }
 
-  i18nt.t = <I18NTaggedTemplate>function (strs: any, ...args: TypeData[]) {
+  i18nt.t = <I18NTaggedTemplate>function (strs: any, ...args: TypeDataItem[]) {
     if (strs.raw) {
       if (strs.length === 1) {
         return translate(instance, strs[0]);

@@ -4,6 +4,7 @@ const translateData = {
     '上午好': ['en:Good morning', 'hk:早安'],
     '下午好': ['en:Good afternoon'],
     '你好，%s': ['en:Hello, %s'],
+    '你好，%{name}': ['en:Hello, %{name}'],
   },
   subkeys: {
     'love': {
