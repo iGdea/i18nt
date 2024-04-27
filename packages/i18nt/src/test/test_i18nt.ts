@@ -71,6 +71,15 @@ describe('#i18nt', () => {
     expect(i18n('你好，%s', 'love')).to.be('en:HI, %s');
   });
 
+  it('#options:language', () => {
+    const i18n = i18nt(translateData, {
+      getlangs: () => 'en',
+    });
+
+    expect(i18n('你好，%s', ['Bacra'], { language: 'cn' })).to.be('你好，Bacra');
+    expect(i18n('你好，%s', ['Bacra'], { language: 'en,cn' })).to.be('en:Hello, Bacra');
+  });
+
   describe('#TaggedTemplate', () => {
     it('#base', () => {
       const i18n = i18nt(translateData, {
