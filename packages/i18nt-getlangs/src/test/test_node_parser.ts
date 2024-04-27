@@ -10,7 +10,7 @@ describe('#nodeParser', () => {
       if (type === 'accept-language') {
         return 'zh,en;q=0.9,zh-CN;q=0.8';
       } else if (type === 'cookie') {
-        return 'xxx1=111; __i18nc__1=zh1; __i18nc__2=zh,zh_hk,en; __i18nc__0=zh0; xxx2=222';
+        return 'xxx1=111; __i18nt__1=zh1; __i18nt__2=zh,zh_hk,en; __i18nt__0=zh0; xxx2=222';
       }
     }
   };
@@ -20,6 +20,6 @@ describe('#nodeParser', () => {
   });
 
   it('#parseNodeCookie', () => {
-    expect(genParser.genParseNodeCookie('__i18nc__')(req)).to.be('zh,zh_hk,en');
+    expect(genParser.genParseNodeCookie('__i18nt__')(req)).to.be('zh,zh_hk,en');
   });
 });

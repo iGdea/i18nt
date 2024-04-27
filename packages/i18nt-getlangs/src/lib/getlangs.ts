@@ -1,7 +1,7 @@
 /* global window document */
 
 /**
- * welang 函数中，获取语言的方法
+ * i18nt 函数中，获取语言的方法
  */
 
 import {

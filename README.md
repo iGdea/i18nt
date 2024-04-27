@@ -1,7 +1,7 @@
-# WELANG
+# i18nt
 
 [![Coveralls][coveralls-image]][coveralls-url]
 
 
-[coveralls-image]: https://img.shields.io/coveralls/iGdea/welang.svg
-[coveralls-url]: https://coveralls.io/github/iGdea/welang
+[coveralls-image]: https://img.shields.io/coveralls/iGdea/i18nt.svg
+[coveralls-url]: https://coveralls.io/github/iGdea/i18nt

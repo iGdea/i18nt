@@ -25,7 +25,7 @@ export type TranslateData = {
 };
 
 
-export type WELANGOptions = {
+export type I18NOptions = {
   subkey?: string,
   langs?: string,
   encode?: EncoderType,
@@ -45,7 +45,7 @@ type TypeDataWithOptions = {
 
 export type TypeData = BaseTypeData | TypeDataWithOptions;
 
-export type WELANGInstance = {
+export type I18NInstance = {
   cache: TranslateCache,
   translateData: TranslateData,
   getlangs: GetLangs,
@@ -54,11 +54,11 @@ export type WELANGInstance = {
 
 
 export function translate(
-  { translateData, cache, getlangs, encoders }: WELANGInstance,
+  { translateData, cache, getlangs, encoders }: I18NInstance,
 
   msg: string,
   tpldata?: TypeData[],
-  options?: WELANGOptions,
+  options?: I18NOptions,
 ): string {
   let langs: string | undefined;
   let defEncode: Encoder | undefined;

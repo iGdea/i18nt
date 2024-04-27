@@ -11,7 +11,7 @@ describe('#base', function () {
   navlans = navlans.toLowerCase().replace(/-/g, '_');
 
   beforeEach(function () {
-    win.__i18nc__ = null;
+    win.__i18nt__ = null;
     document.cookie = 'test_lan=zh,cht;';
     document.cookie = 'test_lan1=zh-tw,cht;';
   });
@@ -19,7 +19,7 @@ describe('#base', function () {
   it('#onlyWebCookie', function () {
     const cache: any = {};
     expect(getlans.onlyWebCookie(cache)).to.be('zh-tw,cht');
-    expect(win.__i18nc__).to.be('zh-tw,cht');
+    expect(win.__i18nt__).to.be('zh-tw,cht');
     expect(getlans.onlyWebCookie(cache)).to.be('zh-tw,cht');
   });
 
@@ -27,14 +27,14 @@ describe('#base', function () {
     const cache: any = {};
     expect(getlans.webCookeAndProcssDomian(cache)).to.be('zh-tw,cht');
     expect(cache.g).to.be(win);
-    expect(win.__i18nc__).to.be('zh-tw,cht');
+    expect(win.__i18nt__).to.be('zh-tw,cht');
     expect(getlans.webCookeAndProcssDomian(cache)).to.be('zh-tw,cht');
   });
 
   it('#onlyWebNavigator', function () {
     const cache: any = {};
     expect(getlans.onlyWebNavigator(cache)).to.be(navlans);
-    expect(win.__i18nc__).to.be(navlans);
+    expect(win.__i18nt__).to.be(navlans);
     expect(getlans.onlyWebNavigator(cache)).to.be(navlans);
   });
 
@@ -42,7 +42,7 @@ describe('#base', function () {
     const cache: any = {};
     expect(getlans.webNavigatorAndProcessDomain(cache)).to.be(navlans);
     expect(cache.g).to.be(win);
-    expect(win.__i18nc__).to.be(navlans);
+    expect(win.__i18nt__).to.be(navlans);
     expect(getlans.webNavigatorAndProcessDomain(cache)).to.be(navlans);
   });
 });

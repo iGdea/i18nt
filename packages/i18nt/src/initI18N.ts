@@ -2,18 +2,18 @@ import { encoders } from './lib/encoders';
 import type { TranslateData } from './lib/translate';
 
 import {
-  welang,
+  i18nt,
 
   I18NGeneratorOptions,
-  WELANGHandler,
-} from './welang';
+  i18ntHandler,
+} from './i18nt';
 
 
-export function initWelang(options: I18NGeneratorOptions) {
+export function initI18N(options: I18NGeneratorOptions) {
   let defaultOptions: I18NGeneratorOptions = mergeOptions({}, options);
 
-  return function (translateData: TranslateData, options?: I18NGeneratorOptions): WELANGHandler {
-    return welang(translateData, options ? mergeOptions(defaultOptions, options) : defaultOptions);
+  return function (translateData: TranslateData, options?: I18NGeneratorOptions): i18ntHandler {
+    return i18nt(translateData, options ? mergeOptions(defaultOptions, options) : defaultOptions);
   };
 }
 

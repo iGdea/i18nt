@@ -4,16 +4,16 @@ import {
 
   TypeData,
   TranslateData,
-  WELANGOptions,
-  WELANGInstance
+  I18NOptions,
+  I18NInstance
 } from './lib/translate';
 
 import { encoders, Encoders } from './lib/encoders';
 
-type WELANGTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeData[]) => string;
-interface WELANGTaggedTemplate {
+type i18ntTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeData[]) => string;
+interface i18ntTaggedTemplate {
   (strs: TemplateStringsArray, ...args: TypeData[]): string;
-  (options: WELANGOptions): WELANGTaggedTemplateHandler;
+  (options: I18NOptions): i18ntTaggedTemplateHandler;
 }
 
 export type I18NGeneratorOptions = {
@@ -21,27 +21,27 @@ export type I18NGeneratorOptions = {
   encoders?: Encoders,
 };
 
-export interface WELANGHandler {
-  (msg: string, tpldata: TypeData[], options?: WELANGOptions): string;
+export interface i18ntHandler {
+  (msg: string, tpldata: TypeData[], options?: I18NOptions): string;
   (msg: string, subkey: string): string;
-  (msg: string, options: WELANGOptions): string;
+  (msg: string, options: I18NOptions): string;
   (msg: string): string;
 
   // 性能太差，单独出函数
   // (strs: TemplateStringsArray, ...args: TypeData[]): string;
-  // (options: WELANGOptions): WELANGTaggedTemplate;
-  t: WELANGTaggedTemplate,
+  // (options: I18NOptions): i18ntTaggedTemplate;
+  t: i18ntTaggedTemplate,
 };
 
 
-const GlobalTempWELANGoptions: WELANGOptions = { subkey: undefined };
+const GlobalTempI18NOptions: I18NOptions = { subkey: undefined };
 
-export function welang(translateData: TranslateData, options?: I18NGeneratorOptions): WELANGHandler {
+export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptions): i18ntHandler {
   const myEncoders = options?.encoders
     ? { ...encoders, ...options.encoders }
     : encoders;
 
-  const instance: WELANGInstance = {
+  const instance: I18NInstance = {
     cache: {},
     translateData,
 
@@ -49,17 +49,17 @@ export function welang(translateData: TranslateData, options?: I18NGeneratorOpti
     encoders: myEncoders,
   };
 
-  const welang = <WELANGHandler>function (msg: string, arg2: any, arg3: any): string {
+  const i18nt = <i18ntHandler>function (msg: string, arg2: any, arg3: any): string {
     if (!msg) return msg;
     // const [arg2, arg3] = args;
 
     let tpldata: TypeData[] | undefined,
-      options: WELANGOptions | undefined = arg3;
+      options: I18NOptions | undefined = arg3;
 
     if (arg2) {
       if (arg2.split) {
-        GlobalTempWELANGoptions.subkey = arg2;
-        options = GlobalTempWELANGoptions;
+        GlobalTempI18NOptions.subkey = arg2;
+        options = GlobalTempI18NOptions;
       } else if (Array.isArray(arg2)) {
         tpldata = arg2;
       } else {
@@ -70,7 +70,7 @@ export function welang(translateData: TranslateData, options?: I18NGeneratorOpti
     return translate(instance, '' + msg, tpldata, options);
   }
 
-  welang.t = <WELANGTaggedTemplate>function (strs: any, ...args: TypeData[]) {
+  i18nt.t = <i18ntTaggedTemplate>function (strs: any, ...args: TypeData[]) {
     if (strs.raw) {
       if (strs.length === 1) {
         return translate(instance, strs[0]);
@@ -78,9 +78,9 @@ export function welang(translateData: TranslateData, options?: I18NGeneratorOpti
         return translate(instance, strs.join('%s'), args);
       }
     } else {
-      const options: WELANGOptions = strs.split ? { subkey: strs } : strs;
+      const options: I18NOptions = strs.split ? { subkey: strs } : strs;
 
-      const func: WELANGTaggedTemplateHandler = (strs, ...args) => {
+      const func: i18ntTaggedTemplateHandler = (strs, ...args) => {
         if (strs.length === 1) {
           return translate(instance, strs[0], undefined, options);
         } else {
@@ -91,5 +91,5 @@ export function welang(translateData: TranslateData, options?: I18NGeneratorOpti
     }
   }
 
-  return welang;
+  return i18nt;
 }

@@ -8,10 +8,10 @@ describe('#getlangs', () => {
     const dm = Domain.create();
 
     dm.run(() => {
-      (dm as any).__i18nc__ = 'zh-tw,cht';
+      (dm as any).__i18nt__ = 'zh-tw,cht';
 
-      expect(fromProcessDomain('__i18nc__')).to.be('zh-tw,cht');
-      expect(fromProcessDomain('__i18nc__')).to.be('zh-tw,cht');
+      expect(fromProcessDomain('__i18nt__')).to.be('zh-tw,cht');
+      expect(fromProcessDomain('__i18nt__')).to.be('zh-tw,cht');
     });
   });
 });
