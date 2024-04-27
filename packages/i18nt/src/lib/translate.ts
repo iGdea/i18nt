@@ -9,15 +9,46 @@ const MSG_REP_REG = /%\{(.+?)\}|%s|%p/g;
 type DBLangs = string[];
 type TranslateResult = string | undefined | null;
 type TranslateSubData = {
+  /**
+   * 原始语言，对应的其他目标语言翻译词条映射字典
+   */
   [word: string]: TranslateResult[],
 };
 
-export type TranslateData = {
-  // 语言列表
-  langs?: DBLangs,
 
-  // 对应翻译
-  common?: TranslateSubData,
+/**
+ * 翻译结果词条字典
+ *
+ * word的排列顺序 和 DBLangs 语言列表排列顺序保持一致
+ *
+ * @example
+ * ```json
+ * {
+ *  "langs": ['en', 'hk'],
+ *  "common": {
+ *    "中国": ["china", "中國"],
+ *
+ *    "subkey": {
+ *      "tw": [, "中華"]
+ *    }
+ *  }
+ * }
+ * ```
+ */
+export type TranslateData = {
+  /**
+   * 语言列表
+   */
+  langs: DBLangs,
+
+  /**
+   * 保存通用的翻译词条
+   */
+  common: TranslateSubData,
+
+  /**
+   * 保存subkey的词条
+   */
   subkeys?: {
     [subkey: string]: TranslateSubData
   },
