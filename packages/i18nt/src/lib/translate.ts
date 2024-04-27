@@ -26,10 +26,11 @@ type TranslateSubData = {
  * {
  *  "langs": ['en', 'hk'],
  *  "common": {
- *    "中国": ["china", "中國"],
- *
- *    "subkey": {
- *      "tw": [, "中華"]
+ *    "中国": ["china", "中國"]
+ *  },
+ *  "subkey": {
+ *    "subkey-tw": {
+ *      "中国": [, "中華"]
  *    }
  *  }
  * }
