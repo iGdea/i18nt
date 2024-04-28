@@ -9,7 +9,7 @@ export const translateData = {
   subkeys: {
     'love': {
       '下午好': [],
-      '你好，%s': ['en:HI, %s'],
+      '你好，%s': ['en:HI, %s', 'hk:你好，%s'],
     }
   },
 };

@@ -59,8 +59,8 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     if (arg2) {
       if (arg2.split) {
         options = arg3
-          ? { subkey: arg2 }
-          : { ...arg3, subkey: arg2 };
+          ? { ...arg3, subkey: arg2 }
+          : { subkey: arg2 };
       } else if (Array.isArray(arg2)) {
         tpldata = arg2;
       } else {
