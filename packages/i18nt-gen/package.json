@@ -1,6 +1,6 @@
 {
   "name": "i18nt-gen",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "i18n template func",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
