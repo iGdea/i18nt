@@ -79,6 +79,23 @@ describe('#i18nt', () => {
       expect(i18n('你好，%s', ['Bacra'], { language: 'cn' })).to.be('你好，Bacra');
       expect(i18n('你好，%s', ['Bacra'], { language: 'en,cn' })).to.be('en:Hello, Bacra');
     });
+
+    it('#forceMatch', () => {
+      const i18n = i18nt(translateData, {
+        getLanguages: () => 'en',
+      });
+
+      expect(i18n('你好，%s', ['Bacra'], { forceMatch: true })).to.be('en:Hello, Bacra');
+      expect(i18n('no exists key', { forceMatch: true })).to.be('');
+    });
+
+    it('#encode', () => {
+      const i18n = i18nt(translateData, {
+        getLanguages: () => 'en',
+      });
+
+      expect(i18n('你好，%s', ['Bacra'], { encode: 'urlEncode' })).to.be('en%3AHello%2C%20Bacra');
+    });
   });
 
   describe('#TaggedTemplate', () => {
