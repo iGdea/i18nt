@@ -68,6 +68,7 @@ describe('#i18nt', () => {
 
     expect(i18n('你好，%s', ['Bacra'], { subkey: 'love' })).to.be('en:HI, Bacra');
     expect(i18n('你好，%s', 'love')).to.be('en:HI, %s');
+    expect(i18n('你好，%s', 'love', {})).to.be('en:HI, %s');
   });
 
   describe('#options', () => {
