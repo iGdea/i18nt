@@ -1,4 +1,4 @@
-import type { GetLangs } from './getlangs';
+import type { GetLanguages } from './getlanguages';
 import {
   Encoders,
   Encoder,
@@ -6,7 +6,7 @@ import {
 
 const MSG_REP_REG = /%\{(.+?)\}|%s|%p/g;
 
-type DBLangs = string[];
+type DBLanguages = string[];
 type TranslateResult = string | undefined | null;
 type TranslateSubData = {
   /**
@@ -19,12 +19,12 @@ type TranslateSubData = {
 /**
  * 翻译结果词条字典
  *
- * word的排列顺序 和 DBLangs 语言列表排列顺序保持一致
+ * word的排列顺序 和 DBLanguages 语言列表排列顺序保持一致
  *
  * @example
  * ```json
  * {
- *  "langs": ['en', 'hk'],
+ *  "languages": ['en', 'hk'],
  *  "common": {
  *    "中国": ["china", "中國"]
  *  },
@@ -40,7 +40,7 @@ export type TranslateData = {
   /**
    * 语言列表
    */
-  langs: DBLangs,
+  languages: DBLanguages,
 
   /**
    * 保存通用的翻译词条
@@ -106,23 +106,23 @@ export interface I18NFullOptions extends I18NOptions {
 export type I18NInstance = {
   cache: TranslateCache,
   translateData: TranslateData,
-  getlangs: GetLangs,
+  getLanguages: GetLanguages,
   encoders: Encoders,
 };
 
 
 export function translate(
-  { translateData, cache, getlangs, encoders }: I18NInstance,
+  { translateData, cache, getLanguages, encoders }: I18NInstance,
 
   msg: string,
   tpldata?: FullTypeData,
   options?: I18NOptions,
 ): string {
-  let langs: string | undefined;
+  let languages: string | undefined;
   let defEncode: Encoder | undefined;
 
   if (options) {
-    if (options.language) langs = options.language;
+    if (options.language) languages = options.language;
     if (options.encode) {
       defEncode = typeof options.encode === 'function'
         ? options.encode
@@ -130,14 +130,14 @@ export function translate(
     }
   }
 
-  if (!langs) langs = getlangs(cache);
+  if (!languages) languages = getLanguages(cache);
 
   let translateMsg: TranslateResult;
   // @ts-ignore
-  if (langs && langs.split) {
-    if (cache.language !== langs) {
-      cache.languageIndexs = langs2index(translateData.langs || [], langs);
-      cache.language = langs;
+  if (languages && languages.split) {
+    if (cache.language !== languages) {
+      cache.languageIndexs = languages2index(translateData.languages || [], languages);
+      cache.language = languages;
     }
 
     const languageIndexs: number[] = cache.languageIndexs || [];
@@ -204,15 +204,15 @@ export function translate(
 }
 
 
-function langs2index(dblangs: DBLangs, langs: string): number[] {
-  const dblangsMap = {} as { [lang: string]: number };
-  const langKeys = langs.split(',');
+function languages2index(dblanguages: DBLanguages, languages: string): number[] {
+  const dblanguagesMap = {} as { [lang: string]: number };
+  const langKeys = languages.split(',');
   const languageIndexs = [] as number[];
 
-  for (let i = dblangs.length; i--;) dblangsMap[dblangs[i]] = i;
+  for (let i = dblanguages.length; i--;) dblanguagesMap[dblanguages[i]] = i;
 
   for (let i = langKeys.length; i--;) {
-    const langIndex = dblangsMap[langKeys[i]];
+    const langIndex = dblanguagesMap[langKeys[i]];
     if (langIndex || langIndex === 0) languageIndexs.push(langIndex);
   }
 

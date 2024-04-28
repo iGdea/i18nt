@@ -5,27 +5,27 @@
  */
 
 import {
-  getLangsFromCookie,
+  getLanguagesFromCookie,
   genCookieRegExp,
 } from './cookie-utils';
 
-type GetLangsByKey = (key: string) => string;
+type GetLanguagesByKey = (key: string) => string;
 
-export const fromProcessDomain: GetLangsByKey = function (key) {
+export const fromProcessDomain: GetLanguagesByKey = function (key) {
   const dm = (process as any).domain;
   const val = dm && dm[key];
   return val ? '' + val : '';
 }
 
-export const fromWebNavigator: GetLangsByKey = function (key) {
+export const fromWebNavigator: GetLanguagesByKey = function (key) {
   const win = window as any;
   let lang = win[key];
 
   if (lang !== false) {
     const nav = window.navigator;
-    const navlangs = nav && nav.languages;
-    if (navlangs) {
-      lang = '' + navlangs;
+    const navlanguages = nav && nav.languages;
+    if (navlanguages) {
+      lang = '' + navlanguages;
     } else {
       const navlang = nav && nav.language;
       if (navlang) lang = navlang;
@@ -41,12 +41,12 @@ export const fromWebNavigator: GetLangsByKey = function (key) {
 export function genFromWebCookie(cookieName: string) {
   const reg = genCookieRegExp(cookieName);
 
-  const fromWeCookie: GetLangsByKey = (key) => {
+  const fromWeCookie: GetLanguagesByKey = (key) => {
     const win = window as any;
     let lang = win[key];
 
     if (!lang && lang !== false) {
-      lang = win[key] = getLangsFromCookie(document.cookie, reg) || false;
+      lang = win[key] = getLanguagesFromCookie(document.cookie, reg) || false;
     }
 
     return lang || '';
@@ -57,28 +57,28 @@ export function genFromWebCookie(cookieName: string) {
 
 
 // 快速生成函数
-export function genGetLangsForD2(
+export function genGetLanguagesForD2(
   key: string,
 
   {
-    getlangs4browser,
-    getlangs4node,
+    getLanguages4browser,
+    getLanguages4node,
   }: {
-    getlangs4browser: GetLangsByKey,
-    getlangs4node: GetLangsByKey
+    getLanguages4browser: GetLanguagesByKey,
+    getLanguages4node: GetLanguagesByKey
   }
 ) {
   return (cache: any): string => {
     if (cache.global) {
       return cache.global[key] || '';
     } else if (cache.platform === 'node') {
-      return getlangs4node(key);
+      return getLanguages4node(key);
     } else if (typeof window == 'object') {
       cache.global = window;
-      return getlangs4browser(key);
+      return getLanguages4browser(key);
     } else if (typeof process == 'object') {
       cache.platform = 'node';
-      return getlangs4node(key);
+      return getLanguages4node(key);
     } else {
       cache.global = {};
       return '';

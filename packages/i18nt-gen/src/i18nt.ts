@@ -1,4 +1,4 @@
-import { getlangs, GetLangs } from './lib/getlangs';
+import { getLanguages, GetLanguages } from './lib/getlanguages';
 import {
   translate,
 
@@ -19,7 +19,7 @@ interface I18NTaggedTemplate {
 }
 
 export type I18NGeneratorOptions = {
-  getlangs?: GetLangs,
+  getLanguages?: GetLanguages,
   encoders?: Encoders,
 };
 
@@ -45,7 +45,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     cache: {},
     translateData,
 
-    getlangs: options?.getlangs || getlangs,
+    getLanguages: options?.getLanguages || getLanguages,
     encoders: myEncoders,
   };
 

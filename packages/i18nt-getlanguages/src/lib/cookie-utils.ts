@@ -3,7 +3,7 @@ export function genCookieRegExp(cookieName: string) {
   return new RegExp(`(?:^|;) *${cookieName}(\\d*?)=([^;]+)`, 'g');
 }
 
-export function getLangsFromCookie(cookie: string, reg: RegExp): string | undefined {
+export function getLanguagesFromCookie(cookie: string, reg: RegExp): string | undefined {
   const cookieLans: string[] = [];
   const splitArr = cookie.split(reg);
 

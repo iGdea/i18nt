@@ -3,7 +3,7 @@
  */
 
 import {
-  getLangsFromCookie,
+  getLanguagesFromCookie,
   genCookieRegExp,
 } from './cookie-utils';
 
@@ -30,7 +30,7 @@ function genParseNodeCookie(cookieName: string) {
 
   const func: NodeReqParse = (req) => {
     const cookie = req.getHeader('Cookie');
-    return cookie && getLangsFromCookie('' + cookie, reg) || '';
+    return cookie && getLanguagesFromCookie('' + cookie, reg) || '';
   };
 
   return func;

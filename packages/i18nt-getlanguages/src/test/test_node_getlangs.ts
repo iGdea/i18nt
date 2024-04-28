@@ -1,9 +1,9 @@
 import expect from 'expect.js';
 import Domain from 'domain';
 
-import { fromProcessDomain } from '../lib/getlangs';
+import { fromProcessDomain } from '../lib/getlanguages';
 
-describe('#getlangs', () => {
+describe('#getLanguages', () => {
   it('#fromProcessDomain', () => {
     const dm = Domain.create();
 

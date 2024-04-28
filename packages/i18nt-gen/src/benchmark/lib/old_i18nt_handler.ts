@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 /* eslint-disable */
-import $getLanguageCode from '../../lib/getlangs';
+import $getLanguageCode from '../../lib/getlanguages';
 import { oldstyle as translateData } from './translate_data';
 
 const $TRANSLATE_JSON_CODE = translateData;

@@ -1,5 +1,5 @@
 const translateData = {
-  langs: ['en', 'hk'],
+  languages: ['en', 'hk'],
   common: {
     '上午好': ['en:Good morning', 'hk:早安'],
     '下午好': ['en:Good afternoon'],
@@ -17,7 +17,7 @@ const translateData = {
 export default translateData;
 
 export const oldstyle = {
-  $: translateData.langs,
+  $: translateData.languages,
   '*': translateData.common,
 
   ...translateData.subkeys,
