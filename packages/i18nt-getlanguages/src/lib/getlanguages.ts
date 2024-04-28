@@ -11,6 +11,8 @@ import {
 
 type GetLanguagesByKey = (key: string) => string;
 
+const IsNodeEnv = typeof process === 'object' && typeof window !== 'object';
+
 export const fromProcessDomain: GetLanguagesByKey = function (key) {
   const dm = (process as any).domain;
   const val = dm && dm[key];
@@ -68,20 +70,9 @@ export function genGetLanguagesForD2(
     getLanguages4node: GetLanguagesByKey
   }
 ) {
-  return (cache: any): string => {
-    if (cache.global) {
-      return cache.global[key] || '';
-    } else if (cache.platform === 'node') {
-      return getLanguages4node(key);
-    } else if (typeof window == 'object') {
-      cache.global = window;
-      return getLanguages4browser(key);
-    } else if (typeof process == 'object') {
-      cache.platform = 'node';
-      return getLanguages4node(key);
-    } else {
-      cache.global = {};
-      return '';
-    }
+  return (): string => {
+    return IsNodeEnv
+      ? getLanguages4node(key)
+      : getLanguages4browser(key);
   };
 }

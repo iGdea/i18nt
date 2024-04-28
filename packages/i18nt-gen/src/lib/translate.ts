@@ -127,7 +127,7 @@ export function translate(
     }
   }
 
-  if (!languages) languages = getLanguages(cache);
+  if (!languages) languages = getLanguages();
 
   let translateMsg: TranslateResult;
   // @ts-ignore
