@@ -1,8 +1,5 @@
 import type { GetLanguages } from './getlanguages';
-import {
-  Encoders,
-  Encoder,
-} from './encoders';
+import type { Encoders, Encoder } from './encoders';
 
 const MSG_REP_REG = /%\{(.+?)\}|%s|%p/g;
 

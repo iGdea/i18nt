@@ -1,16 +1,16 @@
-import { getLanguages, GetLanguages } from './lib/getlanguages';
+import { getLanguages, type GetLanguages } from './lib/getlanguages';
 import {
   translate,
 
-  TypeDataItem,
-  FullTypeData,
-  TranslateData,
-  I18NOptions,
-  I18NFullOptions,
-  I18NInstance
+  type TypeDataItem,
+  type FullTypeData,
+  type TranslateData,
+  type I18NOptions,
+  type I18NFullOptions,
+  type I18NInstance
 } from './lib/translate';
 
-import { encoders, Encoders } from './lib/encoders';
+import { encoders, type Encoders } from './lib/encoders';
 
 type I18NTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeDataItem[]) => string;
 interface I18NTaggedTemplate {

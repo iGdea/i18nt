@@ -4,8 +4,8 @@ import type { TranslateData } from './lib/translate';
 import {
   i18nt,
 
-  I18NGeneratorOptions,
-  I18NHandler,
+  type I18NGeneratorOptions,
+  type I18NHandler,
 } from './i18nt';
 
 
