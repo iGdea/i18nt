@@ -1,4 +1,4 @@
-const translateData = {
+export const translateData = {
   languages: ['en', 'hk'],
   common: {
     '上午好': ['en:Good morning', 'hk:早安'],
@@ -14,7 +14,6 @@ const translateData = {
   },
 };
 
-export default translateData;
 
 export const oldstyle = {
   $: translateData.languages,

@@ -1,6 +1,6 @@
 import expect from 'expect.js';
 
-import translateData from '../benchmark/lib/translate_data';
+import { translateData } from '../benchmark/lib/translate_data';
 import {
   i18nt,
   initI18N,
