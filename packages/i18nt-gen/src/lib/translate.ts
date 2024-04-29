@@ -42,7 +42,7 @@ export type TranslateData = {
   /**
    * 保存通用的翻译词条
    */
-  common: TranslateSubData,
+  common?: TranslateSubData,
 
   /**
    * 保存subkey的词条
