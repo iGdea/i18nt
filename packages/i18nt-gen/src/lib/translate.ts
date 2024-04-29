@@ -69,7 +69,7 @@ export type FullTypeData = TypeDataItem[] | {
   [key: string]: TypeDataItem,
 };
 
-export interface I18NOptions {
+export interface I18NOptions<Lang extends string> {
   /**
    * 针对语言的特殊处理key
    */
@@ -78,7 +78,7 @@ export interface I18NOptions {
   /**
    * 指定翻译语言，可以有多个值。不自动从环境中获取
    */
-  language?: string,
+  language?: Lang,
 
   /**
    * 非变量默认使用的编码方式
@@ -92,7 +92,7 @@ export interface I18NOptions {
 };
 
 
-export interface I18NFullOptions extends I18NOptions {
+export interface I18NFullOptions<Lang extends string> extends I18NOptions<Lang> {
   /**
    * 翻译使用的变量
    */
@@ -108,12 +108,12 @@ export type I18NInstance = {
 };
 
 
-export function translate(
+export function translate<Lang extends string>(
   { translateData, cache, getLanguages, encoders }: I18NInstance,
 
   msg: string,
   tpldata?: FullTypeData,
-  options?: I18NOptions,
+  options?: I18NOptions<Lang>,
 ): string {
   let languages: string | undefined;
   let defEncode: Encoder | undefined;

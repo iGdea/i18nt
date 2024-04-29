@@ -13,9 +13,9 @@ import {
 import { encoders, type Encoders } from './lib/encoders';
 
 type I18NTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeDataItem[]) => string;
-interface I18NTaggedTemplate {
+interface I18NTaggedTemplate<Lang extends string> {
   (strs: TemplateStringsArray, ...args: TypeDataItem[]): string;
-  (options: I18NOptions): I18NTaggedTemplateHandler;
+  (options: I18NOptions<Lang>): I18NTaggedTemplateHandler;
 }
 
 export type I18NGeneratorOptions = {
@@ -23,20 +23,20 @@ export type I18NGeneratorOptions = {
   encoders?: Encoders,
 };
 
-export interface I18NHandler {
-  (msg: string, tpldata: TypeDataItem[], options?: I18NOptions): string;
-  (msg: string, subkey: string, options?: Omit<I18NFullOptions, 'subkey'>): string;
-  (msg: string, options: I18NFullOptions): string;
+export interface I18NHandler<Lang extends string> {
+  (msg: string, tpldata: TypeDataItem[], options?: I18NOptions<Lang>): string;
+  (msg: string, subkey: string, options?: Omit<I18NFullOptions<Lang>, 'subkey'>): string;
+  (msg: string, options: I18NFullOptions<Lang>): string;
   (msg: string): string;
 
   // 性能太差，单独出函数
   // (strs: TemplateStringsArray, ...args: TypeDataItem[]): string;
   // (options: I18NOptions): I18NTaggedTemplate;
-  t: I18NTaggedTemplate,
+  t: I18NTaggedTemplate<Lang>,
 };
 
 
-export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptions): I18NHandler {
+export function i18nt<Lang extends string>(translateData: TranslateData, options?: I18NGeneratorOptions): I18NHandler<Lang> {
   const myEncoders = options?.encoders
     ? { ...encoders, ...options.encoders }
     : encoders;
@@ -49,12 +49,12 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     encoders: myEncoders,
   };
 
-  const i18nt = <I18NHandler>function (msg: string, arg2: any, arg3: any): string {
+  const i18nt = <I18NHandler<Lang>>function (msg: string, arg2: any, arg3: any): string {
     if (!msg) return msg;
     // const [arg2, arg3] = args;
 
     let tpldata: FullTypeData | undefined,
-      options: I18NOptions | undefined = arg3;
+      options: I18NOptions<Lang> | undefined = arg3;
 
     if (arg2) {
       if (arg2.split) {
@@ -72,7 +72,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
     return translate(instance, '' + msg, tpldata, options);
   }
 
-  i18nt.t = <I18NTaggedTemplate>function (strs: any, ...args: TypeDataItem[]) {
+  i18nt.t = <I18NTaggedTemplate<Lang>>function (strs: any, ...args: TypeDataItem[]) {
     if (strs.raw) {
       if (strs.length === 1) {
         return translate(instance, strs[0]);
@@ -80,7 +80,7 @@ export function i18nt(translateData: TranslateData, options?: I18NGeneratorOptio
         return translate(instance, strs.join('%s'), args);
       }
     } else {
-      const options: I18NOptions = strs.split ? { subkey: strs } : strs;
+      const options: I18NOptions<Lang> = strs.split ? { subkey: strs } : strs;
 
       const func: I18NTaggedTemplateHandler = (strs, ...args) => {
         if (strs.length === 1) {
