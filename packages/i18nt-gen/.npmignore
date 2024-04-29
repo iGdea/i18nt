@@ -3,3 +3,5 @@ src
 dist/test
 dist/benchmark
 coverage
+
+tsconfig.tsbuildinfo
