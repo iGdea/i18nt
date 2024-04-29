@@ -1,8 +1,5 @@
-karam.conf.js
-
 .*
-
-test
+src
+dist/test
+dist/benchmark
 coverage
-benchmark
-docs
