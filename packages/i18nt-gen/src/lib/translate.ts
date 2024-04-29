@@ -53,8 +53,8 @@ export type TranslateData = {
 };
 
 type TranslateCache = {
-  language?: string,
-  languageIndexs?: number[],
+  language: string,
+  languageIndexs: number[],
 };
 
 type BaseTypeDataItem = string | number | undefined;
@@ -78,7 +78,7 @@ export interface I18NOptions<Lang extends string> {
   /**
    * 指定翻译语言，可以有多个值。不自动从环境中获取
    */
-  language?: Lang,
+  language?: Lang | Lang[],
 
   /**
    * 非变量默认使用的编码方式
@@ -116,14 +116,25 @@ export function translate<Lang extends string>(
   options?: I18NOptions<Lang>,
 ): string {
   let languages: string | undefined;
+  let langKeys: string[] | undefined;
   let defEncode: Encoder | undefined;
 
   if (options) {
-    if (options.language) languages = options.language;
-    if (options.encode) {
-      defEncode = typeof options.encode === 'function'
-        ? options.encode
-        : encoders[options.encode];
+    const langs = options.language;
+    if (langs) {
+      if (Array.isArray(langs)) {
+        languages = langs.join(',');
+        langKeys = langs;
+      } else {
+        languages = langs;
+      }
+    }
+
+    const encode = options.encode;
+    if (encode) {
+      defEncode = typeof encode === 'function'
+        ? encode
+        : encoders[encode];
     }
   }
 
@@ -133,7 +144,8 @@ export function translate<Lang extends string>(
   // @ts-ignore
   if (languages && languages.split) {
     if (cache.language !== languages) {
-      cache.languageIndexs = languages2index(translateData.languages || [], languages);
+      if (!langKeys) langKeys = languages.split(',');
+      cache.languageIndexs = languages2index(translateData.languages || [], langKeys);
       cache.language = languages;
     }
 
@@ -201,9 +213,8 @@ export function translate<Lang extends string>(
 }
 
 
-function languages2index(dblanguages: DBLanguages, languages: string): number[] {
+function languages2index(dblanguages: DBLanguages, langKeys: string[]): number[] {
   const dblanguagesMap = {} as { [lang: string]: number };
-  const langKeys = languages.split(',');
   const languageIndexs = [] as number[];
 
   for (let i = dblanguages.length; i--;) dblanguagesMap[dblanguages[i]] = i;

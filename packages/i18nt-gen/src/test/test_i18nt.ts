@@ -73,12 +73,13 @@ describe('#i18nt', () => {
 
   describe('#options', () => {
     it('#language', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = i18nt<'en' | 'cn'>(translateData, {
         getLanguages: () => 'en',
       });
 
       expect(i18n('你好，%s', ['Bacra'], { language: 'cn' })).to.be('你好，Bacra');
-      expect(i18n('你好，%s', ['Bacra'], { language: 'en,cn' })).to.be('en:Hello, Bacra');
+      expect(i18n('你好，%s', ['Bacra'], { language: ['en', 'cn'] })).to.be('en:Hello, Bacra');
+      // expect(i18n('你好，%s', ['Bacra'], { language: 'hk' })).to.be('en:Hello, Bacra');
     });
 
     it('#forceMatch', () => {

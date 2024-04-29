@@ -42,7 +42,10 @@ export function i18nt<Lang extends string>(translateData: TranslateData, options
     : encoders;
 
   const instance: I18NInstance = {
-    cache: {},
+    cache: {
+      language: '',
+      languageIndexs: [],
+    },
     translateData,
 
     getLanguages: options?.getLanguages || getLanguages,
@@ -98,8 +101,10 @@ export function i18nt<Lang extends string>(translateData: TranslateData, options
 
 
 // test
-// const i18n = i18nt({});
+// const i18n = i18nt<'en' | 'ja' | 'hk'>({ languages: [], common: {} });
 // i18n('sssss', 'substype', {
 //   // subkey: '1111',
 //   encode: 'jsEncode',
+//   // language: 'en'
+//   language: ['en', 'ja'],
 // });
