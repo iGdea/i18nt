@@ -1,7 +1,7 @@
 import expect from 'expect.js';
 import Domain from 'domain';
 
-import { fromProcessDomain } from '../lib/getlanguages';
+import { fromProcessDomain } from '../lib/getLanguages';
 
 describe('#getLanguages', () => {
   it('#fromProcessDomain', () => {

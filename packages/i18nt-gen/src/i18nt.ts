@@ -1,4 +1,4 @@
-import { getLanguages, type GetLanguages } from './lib/getlanguages';
+import { getLanguages, type GetLanguages } from './lib/getLanguages';
 import {
   translate,
 

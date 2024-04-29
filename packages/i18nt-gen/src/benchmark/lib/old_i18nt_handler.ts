@@ -1,22 +1,17 @@
-// @ts-nocheck
+import { getLanguages as $getLanguageCode } from '../../lib/getLanguages';
+import { oldstyle as $TRANSLATE_JSON_CODE } from './translate_data';
 
-/* eslint-disable */
-import $getLanguageCode from '../../lib/getlanguages';
-import { oldstyle as translateData } from './translate_data';
 
-const $TRANSLATE_JSON_CODE = translateData;
-
-function $handlerName(msg, tpldata, subkey) {
+function $handlerName(msg: any, tpldata: any, subkey: any) {
   if (!msg) return msg === undefined || msg === null ? '' : '' + msg;
 
-  var self = $handlerName,
-    data = self.$ || (self.$ = {}),
-    translateJSON,
+  var self: any = $handlerName,
+    translateJSON: any,
     replace_index = 0,
-    options = {},
-    lanIndexArr,
+    options: any = {},
+    lanIndexArr: any,
     i,
-    lanIndex,
+    lanIndex: any,
     translateMsg,
     translateValues;
 
@@ -30,20 +25,15 @@ function $handlerName(msg, tpldata, subkey) {
     subkey = options.subkey;
   }
 
-  var LAN = options.language || $getLanguageCode(data);
+  var LAN = options.language || $getLanguageCode();
 
   if (LAN && LAN.split) {
     if (self.L != LAN) {
-      // K: __FILE_KEY__
-      // V: __FUNCTION_VERSION__
-      // D: __TRANSLATE_JSON__
-      self.K = '$FILE_KEY';
-      self.V = '$FUNCTION_VERSION';
       self.D = $TRANSLATE_JSON_CODE;
       translateJSON = self.D;
 
       var dblans = translateJSON.$ || [],
-        dblansMap = {},
+        dblansMap: any = {},
         lanKeys = LAN.split(',');
       lanIndexArr = self.M = [];
 
@@ -59,7 +49,7 @@ function $handlerName(msg, tpldata, subkey) {
 
     lanIndexArr = self.M;
     translateJSON = self.D;
-    var _getVaule = function (subkey) {
+    var _getVaule = function (subkey: string) {
       translateValues =
         translateJSON[subkey] && translateJSON[subkey][msg];
       if (translateValues) {
@@ -86,7 +76,7 @@ function $handlerName(msg, tpldata, subkey) {
   if (!tpldata.length || msg.indexOf('%') == -1) return msg;
 
   return msg
-    .replace(/%\{(\d+)\}/g, function (all, index) {
+    .replace(/%\{(\d+)\}/g, function (all: string, index: string) {
       var newVal = tpldata[+index];
       return newVal === undefined ? '' : newVal;
     })
@@ -97,4 +87,3 @@ function $handlerName(msg, tpldata, subkey) {
 }
 
 module.exports = $handlerName;
-/* eslint-enable */
