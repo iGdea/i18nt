@@ -96,11 +96,12 @@ describe('#i18nt', () => {
         getLanguages: () => 'en',
       });
 
-      expect(i18n('你好，%s', ['Bacra woo'], { encode: 'urlEncode' })).to.be('en%3AHello%2C%20Bacra%20woo');
+      expect(i18n('你好，%s', ['Bacra woo'], { encode: 'url' })).to.be('en%3AHello%2C%20Bacra%20woo');
+      expect(i18n('你好，%p', ['Bacra woo'], { encode: 'url' })).to.be('en%3AHello%2C%20Bacra woo');
       expect(i18n('你好，%s', [{
         text: 'Bacra woo',
         encode: false,
-      }], { encode: 'urlEncode' })).to.be('en%3AHello%2C%20Bacra woo');
+      }], { encode: 'url' })).to.be('en%3AHello%2C%20Bacra woo');
     });
   });
 
@@ -122,7 +123,7 @@ describe('#i18nt', () => {
       });
 
       const username = 'Bacra woo';
-      const key = i18n.t({ encode: 'urlEncode' });
+      const key = i18n.t({ encode: 'url' });
 
       expect(key`你好，${username}`).to.be('en%3AHello%2C%20Bacra%20woo');
       expect(key`你好，${{ text: username, encode: false }}`).to.be('en%3AHello%2C%20Bacra woo');

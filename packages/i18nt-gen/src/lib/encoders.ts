@@ -12,7 +12,7 @@ export type Encoders = {
 };
 
 export const encoders: Encoders = {
-  jsEncode,
-  htmlEncode,
-  urlEncode,
+  js: jsEncode,
+  html: htmlEncode,
+  url: urlEncode,
 };

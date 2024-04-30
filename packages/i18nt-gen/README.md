@@ -6,12 +6,13 @@ i18nt-gen
 [![NPM License][license-image]][npm-url]
 
 生成翻译函数
-# Install
+
+## Install
 ```
 npm install i18nt-gen --save
 ```
 
-# Usage
+## Usage
 
 ```javascript
 const { i18nt } = require('i18nt-gen');
