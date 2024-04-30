@@ -131,6 +131,21 @@ describe('#i18nt', () => {
 
   });
 
+  it('#encodeFunc', () => {
+    const i18n = i18nt(translateData, {
+      getLanguages: () => 'en',
+    });
+
+    expect(i18n.urlEncode('你好，%s', ['Bacra woo'])).to.be('en%3AHello%2C%20Bacra%20woo');
+    expect(i18n.urlEncode('你好，%p', ['Bacra woo'])).to.be('en%3AHello%2C%20Bacra woo');
+    expect(i18n.urlEncode('你好，%s', [{
+      text: 'Bacra woo',
+      encode: false,
+    }])).to.be('en%3AHello%2C%20Bacra woo');
+
+    expect(i18n.urlEncode('你好，%s', ['<Bacra>'], { encode: 'html' })).to.be('en:Hello, &lt;Bacra&gt;');
+  });
+
   it('#noInit', () => {
     const i18nt0 = initI18N({
       getLanguages: () => 'en',
