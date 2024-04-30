@@ -72,24 +72,24 @@ export function i18nt<Lang extends string>(translateData: TranslateData, options
       }
     }
 
-    return translate(instance, '' + msg, tpldata, options);
+    return translate(instance, '' + msg, options || {}, tpldata);
   }
 
   i18nt.t = <I18NTaggedTemplate<Lang>>function (strs: any, ...args: TypeDataItem[]) {
     if (strs.raw) {
       if (strs.length === 1) {
-        return translate(instance, strs[0]);
+        return translate(instance, strs[0], {});
       } else {
-        return translate(instance, strs.join('%s'), args);
+        return translate(instance, strs.join('%s'), {}, args);
       }
     } else {
       const options: I18NOptions<Lang> = strs.split ? { subkey: strs } : strs;
 
       const func: I18NTaggedTemplateHandler = (strs, ...args) => {
         if (strs.length === 1) {
-          return translate(instance, strs[0], undefined, options);
+          return translate(instance, strs[0], options);
         } else {
-          return translate(instance, strs.join('%s'), args, options);
+          return translate(instance, strs.join('%s'), options, args);
         }
       };
       return func;

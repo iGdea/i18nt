@@ -115,14 +115,14 @@ export function translate<Lang extends string>(
   { translateData, cache, getLanguages, encoders }: I18NInstance,
 
   msg: string,
+  options: I18NOptions<Lang>,
   tpldata?: FullTypeData,
-  options?: I18NOptions<Lang>,
 ): string {
   let languages: string | undefined;
   let langKeys: string[] | undefined;
   let defEncode: Encoder | undefined;
 
-  if (options) {
+  {
     const langs = options.language;
     if (langs) {
       if (Array.isArray(langs)) {
@@ -153,7 +153,7 @@ export function translate<Lang extends string>(
     }
 
     const languageIndexs: number[] = cache.languageIndexs || [];
-    const subkeyDB = options?.subkey && translateData.subkeys?.[options.subkey];
+    const subkeyDB = options.subkey && translateData.subkeys?.[options.subkey];
     const commonDB = translateData.common;
     if (commonDB) {
       if (!subkeyDB) {
@@ -176,7 +176,7 @@ export function translate<Lang extends string>(
 
   if (translateMsg) {
     msg = '' + translateMsg;
-  } else if (options?.forceMatch) {
+  } else if (options.forceMatch) {
     return '';
   }
 
