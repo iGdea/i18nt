@@ -117,6 +117,7 @@ export function translate<Lang extends string>(
   msg: string,
   options: I18NOptions<Lang>,
   tpldata?: FullTypeData,
+  defEncodeKey?: string,
 ): string {
   let languages: string | undefined;
   let langKeys: string[] | undefined;
@@ -138,6 +139,8 @@ export function translate<Lang extends string>(
       defEncode = typeof encode === 'function'
         ? encode
         : encoders[encode];
+    } else if (defEncodeKey) {
+      defEncode = encoders[defEncodeKey];
     }
   }
 

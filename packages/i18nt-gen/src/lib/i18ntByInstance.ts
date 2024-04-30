@@ -1,16 +1,13 @@
-import { getLanguages, type GetLanguages } from './lib/getLanguages';
 import {
   translate,
 
   type TypeDataItem,
   type FullTypeData,
-  type TranslateData,
   type I18NOptions,
   type I18NFullOptions,
   type I18NInstance
-} from './lib/translate';
+} from './translate';
 
-import { encoders, type Encoders } from './lib/encoders';
 
 type I18NTaggedTemplateHandler = (strs: TemplateStringsArray, ...args: TypeDataItem[]) => string;
 interface I18NTaggedTemplate<Lang extends string> {
@@ -18,12 +15,7 @@ interface I18NTaggedTemplate<Lang extends string> {
   (options: I18NOptions<Lang>): I18NTaggedTemplateHandler;
 }
 
-export type I18NGeneratorOptions = {
-  getLanguages?: GetLanguages,
-  encoders?: Encoders,
-};
-
-export interface I18NHandler<Lang extends string> {
+export interface I18NHandlerEncode<Lang extends string> {
   (msg: string, tpldata: TypeDataItem[], options?: I18NOptions<Lang>): string;
   (msg: string, subkey: string, options?: Omit<I18NFullOptions<Lang>, 'subkey'>): string;
   (msg: string, options: I18NFullOptions<Lang>): string;
@@ -36,23 +28,8 @@ export interface I18NHandler<Lang extends string> {
 };
 
 
-export function i18nt<Lang extends string>(translateData: TranslateData, options?: I18NGeneratorOptions): I18NHandler<Lang> {
-  const myEncoders = options?.encoders
-    ? { ...encoders, ...options.encoders }
-    : encoders;
-
-  const instance: I18NInstance = {
-    cache: {
-      language: '',
-      languageIndexs: [],
-    },
-    translateData,
-
-    getLanguages: options?.getLanguages || getLanguages,
-    encoders: myEncoders,
-  };
-
-  const i18nt = <I18NHandler<Lang>>function (msg: string, arg2: any, arg3: any): string {
+export function i18ntByInstance<Lang extends string>(instance: I18NInstance, defEncodeKey?: string): I18NHandlerEncode<Lang> {
+  const i18nt = <I18NHandlerEncode<Lang>>function (msg: string, arg2: any, arg3: any): string {
     if (!msg) return msg;
     // const [arg2, arg3] = args;
 
@@ -72,24 +49,24 @@ export function i18nt<Lang extends string>(translateData: TranslateData, options
       }
     }
 
-    return translate(instance, '' + msg, options || {}, tpldata);
+    return translate(instance, '' + msg, options || {}, tpldata, defEncodeKey);
   }
 
   i18nt.t = <I18NTaggedTemplate<Lang>>function (strs: any, ...args: TypeDataItem[]) {
     if (strs.raw) {
       if (strs.length === 1) {
-        return translate(instance, strs[0], {});
+        return translate(instance, strs[0], {}, undefined, defEncodeKey);
       } else {
-        return translate(instance, strs.join('%s'), {}, args);
+        return translate(instance, strs.join('%s'), {}, args, defEncodeKey);
       }
     } else {
       const options: I18NOptions<Lang> = strs.split ? { subkey: strs } : strs;
 
       const func: I18NTaggedTemplateHandler = (strs, ...args) => {
         if (strs.length === 1) {
-          return translate(instance, strs[0], options);
+          return translate(instance, strs[0], options, undefined, defEncodeKey);
         } else {
-          return translate(instance, strs.join('%s'), options, args);
+          return translate(instance, strs.join('%s'), options, args, defEncodeKey);
         }
       };
       return func;
@@ -98,13 +75,3 @@ export function i18nt<Lang extends string>(translateData: TranslateData, options
 
   return i18nt;
 }
-
-
-// test
-// const i18n = i18nt<'en' | 'ja' | 'hk'>({ languages: [], common: {} });
-// i18n('sssss', 'substype', {
-//   // subkey: '1111',
-//   encode: 'jsEncode',
-//   // language: 'en'
-//   language: ['en', 'ja'],
-// });
