@@ -108,6 +108,9 @@ export type I18NInstance = {
 };
 
 
+/**
+ * 翻译并组装字符串模版
+ */
 export function translate<Lang extends string>(
   { translateData, cache, getLanguages, encoders }: I18NInstance,
 
@@ -181,6 +184,14 @@ export function translate<Lang extends string>(
     return defEncode ? defEncode(msg) : msg;
   }
 
+  return renderMsg(msg, tpldata, defEncode);
+}
+
+
+/**
+ * 替换字符串中的占位符，输出字符串结果
+ */
+function renderMsg(msg: string, tpldata: FullTypeData, defEncode?: Encoder): string {
   // 使用split性能比replace更好
   let replaceIndex = 0;
   const isTplDataArr = Array.isArray(tpldata);
@@ -224,7 +235,9 @@ export function translate<Lang extends string>(
   return msgResult.join('');
 }
 
-
+/**
+ * 将语言列表转换成翻译词典languages数组中的index列表
+ */
 function languages2index(dblanguages: DBLanguages, langKeys: string[]): number[] {
   const dblanguagesMap = {} as { [lang: string]: number };
   const languageIndexs = [] as number[];
@@ -239,6 +252,10 @@ function languages2index(dblanguages: DBLanguages, langKeys: string[]): number[]
   return languageIndexs;
 }
 
+
+/**
+ * 展开单项tpldata数据，并根据编码函数，确认是否需要转义
+ */
 function encodeTplData(encode: Encoder | undefined, tplVal: TypeDataItem | undefined): string | number {
   let msg: string | number | undefined;
   let useEncoder: boolean = true;
