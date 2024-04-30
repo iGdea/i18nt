@@ -1,7 +1,7 @@
 import type { GetLanguages } from './getLanguages';
 import type { Encoders, Encoder } from './encoders';
 
-const MSG_REP_REG = /%\{(.+?)\}|%s|%p/g;
+const MSG_REP_REG = /(%\{(.+?)\}|%s|%p)/g;
 
 type DBLanguages = string[];
 type TranslateResult = string | undefined | null;
@@ -184,32 +184,44 @@ export function translate<Lang extends string>(
   // 使用split性能比replace更好
   let replaceIndex = 0;
   const isTplDataArr = Array.isArray(tpldata);
+  const msgResult: (string | number)[] = [];
 
-  return msg.split(MSG_REP_REG)
-    .map((msg, index) => {
-      let encode = defEncode;
+  const msgArr = msg.split(MSG_REP_REG);
 
-      if (index % 2) {
-        let tplVal = isTplDataArr
-          // 如果是数组，则只支持数字index
-          ? (msg ? tpldata[+msg] : tpldata[replaceIndex++])
-          // 如果是obj，则只支持key
-          : (msg ? tpldata[msg] : undefined);
+  // 便利分割情况
+  // 一次遍历3个节点
+  for (let index = 0, len = msgArr.length; index < len; index += 3) {
+    // 需要翻译的内容
+    const i18nWord = msgArr[index];
+    // 正则完全匹配的Key
+    const placeholder = msgArr[index + 1];
 
-        // 处理encode问题
-        const tplValEncode = tplVal && (tplVal as TypeDataItemWithOptions).encode;
-        if (tplValEncode === true || tplValEncode === false) {
-          tplVal = (tplVal as TypeDataItemWithOptions).text;
-          if (tplValEncode === false) encode = undefined;
+    msgResult.push(defEncode ? defEncode(i18nWord) : i18nWord);
+
+    if (placeholder === '%p') {
+      // %p 占位符，不处理encode
+      // 只处理数组情况下的替换
+      if (isTplDataArr) msgResult.push(encodeTplData(undefined, tpldata[replaceIndex++]));
+    } else if (placeholder === '%s') {
+      // 只处理数组情况下的替换
+      if (isTplDataArr) msgResult.push(encodeTplData(defEncode, tpldata[replaceIndex++]));
+    } else {
+      const placeholderKey = msgArr[index + 2];
+      if (isTplDataArr) {
+        const placeholderIndex = +placeholderKey;
+        if (!isNaN(placeholderIndex)) {
+          msgResult.push(encodeTplData(defEncode, tpldata[placeholderIndex]));
         }
-
-        msg = tplVal === undefined ? '' : tplVal as string;
+      } else {
+        // 这里存在示例的情况
+        // 所以可能存在比较多无值的key
+        const submsg = encodeTplData(defEncode, tpldata[placeholderKey]);
+        if (submsg) msgResult.push(submsg);
       }
+    }
+  }
 
-      if (!msg) return msg || '';
-      return encode ? encode(msg) : msg;
-    })
-    .join('');
+  return msgResult.join('');
 }
 
 
@@ -225,4 +237,25 @@ function languages2index(dblanguages: DBLanguages, langKeys: string[]): number[]
   }
 
   return languageIndexs;
+}
+
+function encodeTplData(encode: Encoder | undefined, tplVal: TypeDataItem | undefined): string | number {
+  let msg: string | number | undefined;
+  let useEncoder: boolean = true;
+
+  if (typeof tplVal === 'object' && tplVal) {
+    msg = tplVal.text;
+    useEncoder = tplVal.encode;
+  } else {
+    msg = tplVal;
+  }
+
+  if (msg === undefined) return '';
+  if (msg === 0) return '0';
+
+  if (typeof msg === 'string') {
+    return useEncoder !== false && encode ? encode(msg) : msg;
+  }
+
+  return msg;
 }
