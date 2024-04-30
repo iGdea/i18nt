@@ -96,7 +96,11 @@ describe('#i18nt', () => {
         getLanguages: () => 'en',
       });
 
-      expect(i18n('你好，%s', ['Bacra'], { encode: 'urlEncode' })).to.be('en%3AHello%2C%20Bacra');
+      expect(i18n('你好，%s', ['Bacra woo'], { encode: 'urlEncode' })).to.be('en%3AHello%2C%20Bacra%20woo');
+      expect(i18n('你好，%s', [{
+        text: 'Bacra woo',
+        encode: false,
+      }], { encode: 'urlEncode' })).to.be('en%3AHello%2C%20Bacra woo');
     });
   });
 
@@ -106,10 +110,10 @@ describe('#i18nt', () => {
         getLanguages: () => 'en',
       });
 
-      const username = 'Bacra';
+      const username = 'Bacra woo';
 
       expect(i18n.t`上午好`).to.be('en:Good morning');
-      expect(i18n.t`你好，${username}`).to.be('en:Hello, Bacra');
+      expect(i18n.t`你好，${username}`).to.be('en:Hello, Bacra woo');
     });
 
     it('#options', () => {
@@ -117,10 +121,11 @@ describe('#i18nt', () => {
         getLanguages: () => 'en',
       });
 
-      const username = 'Bacra';
+      const username = 'Bacra woo';
       const key = i18n.t({ encode: 'urlEncode' });
 
-      expect(key`你好，${username}`).to.be('en%3AHello%2C%20Bacra');
+      expect(key`你好，${username}`).to.be('en%3AHello%2C%20Bacra%20woo');
+      expect(key`你好，${{ text: username, encode: false }}`).to.be('en%3AHello%2C%20Bacra woo');
     });
 
   });
