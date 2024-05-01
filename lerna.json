@@ -8,7 +8,8 @@
         "test/*",
         "*.md",
         "packages/i18nc-core/dist/i18nc_core.js"
-      ]
+      ],
+      "npmClientArgs": ["--access", "public"]
     },
     "bootstrap": {
       "npmClientArgs": ["--no-package-lock"]
