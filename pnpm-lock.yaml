@@ -21,7 +21,7 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       i18nt-getlanguages:
-        specifier: ^1.1.5
+        specifier: ^1.1.6
         version: link:../i18nt-getlanguages
     devDependencies:
       '@types/benchmark':

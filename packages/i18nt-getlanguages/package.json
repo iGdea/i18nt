@@ -1,6 +1,6 @@
 {
   "name": "i18nt-getlanguages",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Get languages of i18nt",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/i18nt-getlanguages",
   "devDependencies": {
-    "@types/mocha": "^10.0.6",
     "@types/expect.js": "^0.3.32",
+    "@types/mocha": "^10.0.6",
     "@types/node": "^20.12.7",
     "expect.js": "^0.3.1",
     "mocha": "^10.4.0",
