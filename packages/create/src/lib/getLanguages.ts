@@ -1,4 +1,4 @@
-import { getLanguages as Getlanguages } from 'i18nt-getlanguages';
+import { getLanguages as Getlanguages } from '@i18n.t/getlanguages';
 
 export type GetLanguages = () => string | undefined;
 

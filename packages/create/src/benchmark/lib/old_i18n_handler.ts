@@ -2,7 +2,7 @@ import { getLanguages as $getLanguageCode } from '../../lib/getLanguages';
 import { oldstyle as $TRANSLATE_JSON_CODE } from './translate_data';
 
 
-function $handlerName(msg: any, tpldata: any, subkey: any) {
+export default function $handlerName(msg: any, tpldata?: any, subkey?: any) {
   if (!msg) return msg === undefined || msg === null ? '' : '' + msg;
 
   var self: any = $handlerName,
@@ -85,5 +85,3 @@ function $handlerName(msg: any, tpldata: any, subkey: any) {
       return newVal === undefined ? '' : newVal;
     });
 }
-
-module.exports = $handlerName;

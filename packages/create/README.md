@@ -1,4 +1,4 @@
-i18nt-gen
+@i18n.t/create
 =========
 
 [![NPM Version][npm-image]][npm-url]
@@ -9,14 +9,14 @@ i18nt-gen
 
 ## Install
 ```
-npm install i18nt-gen --save
+npm install @i18n.t/create --save
 ```
 
 ## Usage
 
 ```javascript
-const { i18nt } = require('i18nt-gen');
-const i18n = i18nt(translateData);
+const { createI18N } = require('@i18n.t/create');
+const i18n = createI18N(translateData);
 
 i18n('中文');   // chinese
 i18n('中文', 'short');   // zh

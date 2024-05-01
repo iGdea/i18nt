@@ -1,15 +1,12 @@
 import expect from 'expect.js';
 
 import { translateData } from '../benchmark/lib/translate_data';
-import {
-  i18nt,
-  initI18N,
-} from '../';
+import { createI18N } from '../';
 
 
-describe('#i18nt', () => {
+describe('#createI18N', () => {
   it('#base', () => {
-    const i18n = i18nt(translateData, {
+    const i18n = createI18N(translateData, {
       getLanguages: () => 'en',
     });
 
@@ -20,7 +17,7 @@ describe('#i18nt', () => {
   it('#languages', () => {
     let languages = 'hk,en';
 
-    const i18n = i18nt(translateData, {
+    const i18n = createI18N(translateData, {
       getLanguages: () => languages,
     });
 
@@ -33,7 +30,7 @@ describe('#i18nt', () => {
 
   describe('#tpldata', () => {
     it('#args: array', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = createI18N(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -43,7 +40,7 @@ describe('#i18nt', () => {
     });
 
     it('#args: options-array', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = createI18N(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -52,7 +49,7 @@ describe('#i18nt', () => {
     });
 
     it('#args: options-map', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = createI18N(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -62,7 +59,7 @@ describe('#i18nt', () => {
   });
 
   it('#subkey', () => {
-    const i18n = i18nt(translateData, {
+    const i18n = createI18N(translateData, {
       getLanguages: () => 'en',
     });
 
@@ -73,7 +70,7 @@ describe('#i18nt', () => {
 
   describe('#options', () => {
     it('#language', () => {
-      const i18n = i18nt<'en' | 'cn'>(translateData, {
+      const i18n = createI18N<'en' | 'cn'>(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -83,7 +80,7 @@ describe('#i18nt', () => {
     });
 
     it('#forceMatch', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = createI18N(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -92,7 +89,7 @@ describe('#i18nt', () => {
     });
 
     it('#encode', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = createI18N(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -107,7 +104,7 @@ describe('#i18nt', () => {
 
   describe('#TaggedTemplate', () => {
     it('#base', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = createI18N(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -118,7 +115,7 @@ describe('#i18nt', () => {
     });
 
     it('#options', () => {
-      const i18n = i18nt(translateData, {
+      const i18n = createI18N(translateData, {
         getLanguages: () => 'en',
       });
 
@@ -132,7 +129,7 @@ describe('#i18nt', () => {
   });
 
   it('#encodeFunc', () => {
-    const i18n = i18nt(translateData, {
+    const i18n = createI18N(translateData, {
       getLanguages: () => 'en',
     });
 
@@ -144,18 +141,5 @@ describe('#i18nt', () => {
     }])).to.be('en%3AHello%2C%20Bacra woo');
 
     expect(i18n.urlEncode('你好，%s', ['<Bacra>'], { encode: 'html' })).to.be('en:Hello, &lt;Bacra&gt;');
-  });
-
-  it('#noInit', () => {
-    const i18nt0 = initI18N({
-      getLanguages: () => 'en',
-    });
-
-    const i18n = i18nt0(translateData, {
-      getLanguages: () => 'hk',
-    });
-
-
-    expect(i18n('上午好')).to.be('hk:早安');
   });
 });

@@ -1,7 +1,6 @@
 import * as Benchmark from 'benchmark';
-import newI18N from './lib/new_i18nt_handler';
-
-const oldI18N = require('./lib/old_i18nt_handler');
+import newI18N from './lib/new_i18n_handler';
+import oldI18N from './lib/old_i18n_handler';
 
 const suite = new Benchmark.Suite();
 
