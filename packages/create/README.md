@@ -1,5 +1,5 @@
 @i18n.t/create
-=========
+==============
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][npm-url]
@@ -37,7 +37,7 @@ i18n.urlEncode.t`我是${username}`;                // %E6%88%91%E6%98%AFBacra
 ```
 
 
-[npm-image]: https://img.shields.io/npm/v/i18nt.svg
-[downloads-image]: https://img.shields.io/npm/dm/i18nt.svg
-[npm-url]: https://www.npmjs.org/package/i18nt
-[license-image]: https://img.shields.io/npm/l/i18nt.svg
+[npm-image]: https://img.shields.io/npm/v/@i18n.t/create.svg
+[downloads-image]: https://img.shields.io/npm/dm/@i18n.t/create.svg
+[npm-url]: https://www.npmjs.org/package/@i18n.t/create
+[license-image]: https://img.shields.io/npm/l/@i18n.t/create.svg
