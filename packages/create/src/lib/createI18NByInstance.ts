@@ -60,7 +60,7 @@ export function createI18NByInstance<Lang extends string>(instance: I18NInstance
         return translate(instance, strs.join('%s'), {}, args, defEncodeKey);
       }
     } else {
-      const options: I18NOptions<Lang> = strs.split ? { subkey: strs } : strs;
+      const options: I18NOptions<Lang> = strs;
 
       const func: I18NTaggedTemplateHandler = (strs, ...args) => {
         if (strs.length === 1) {
