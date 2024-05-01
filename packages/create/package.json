@@ -1,6 +1,6 @@
 {
   "name": "@i18n.t/create",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "i18n template func",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/create",
   "dependencies": {
-    "htmlyer": "^1.0.1",
-    "@i18n.t/getlanguages": "^1.1.6"
+    "@i18n.t/getlanguages": "^1.1.7",
+    "htmlyer": "^1.0.1"
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.5",
