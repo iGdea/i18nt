@@ -14,8 +14,8 @@ jobs:
         with:
           node-version: 18.x
           registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: npm run bootstrap --if-present
+      - run: npm i -g pnpm
+      - run: pnpm install
       - run: npm run build --if-present
       - run: npm run pub2 --if-present
         env:

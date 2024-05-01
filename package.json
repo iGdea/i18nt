@@ -16,7 +16,7 @@
     "test-build": "lerna run test-build --"
   },
   "devDependencies": {
-    "lerna": "^5.4.3",
+    "lerna": "^8.1.2",
     "nyc": "^15.1.0"
   }
 }
