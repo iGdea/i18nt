@@ -1,7 +1,7 @@
 node_modules
-**/test/tmp
-**/test/output/tmp
 coverage
+
+lerna-debug.log
 npm-debug.log
 packages/**/package-lock.json
 
@@ -11,5 +11,3 @@ packages/**/package-lock.json
 .history
 .nyc_output
 dist
-
-stdout_log_file_*
