@@ -29,7 +29,11 @@ i18n('我是%{username} %{firstname}', { tpldata: { username: 'Bacra' firstname:
 const username = 'Bacra';
 i18n.t`我是${username}`  // I‘m Bacra
 i18n.t({ language: 'hk' })`我是${username}`  // 我是Bacra
-i18n.t({ encode: 'urlEncode' })`我是${{ text: username, encode: false }}`  // %E6%88%91%E6%98%AFBacra
+
+i18n('我是%s', ['Bacra'], { encode: 'url' });     // %E6%88%91%E6%98%AFBacra
+i18n.t({ encode: 'url' })`我是${{ text: username, encode: false }}`;  // %E6%88%91%E6%98%AFBacra
+i18n.urlEncode('我是%s', ['Bacra']);              // %E6%88%91%E6%98%AFBacra
+i18n.urlEncode.t`我是${username}`;                // %E6%88%91%E6%98%AFBacra
 ```
 
 
