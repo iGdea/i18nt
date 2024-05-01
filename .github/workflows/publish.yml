@@ -16,7 +16,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm i -g pnpm@8.6.11
       - run: pnpm install --no-frozen-lockfile
-      - run: pnpm run build --if-present
-      - run: pnpm run pub2 --if-present
+      - run: npm run build --if-present
+      - run: npm run pub2 --if-present
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
