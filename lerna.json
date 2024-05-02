@@ -9,6 +9,7 @@
         "*.md",
         "packages/i18nc-core/dist/i18nc_core.js"
       ],
+      "npmClient": "npm",
       "npmClientArgs": ["--access", "public"]
     },
     "bootstrap": {
