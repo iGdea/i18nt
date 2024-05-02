@@ -1,6 +1,6 @@
 {
   "name": "@i18n.t/create",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "create i18n handler",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/create",
   "dependencies": {
-    "@i18n.t/getlanguages": "^1.1.7",
+    "@i18n.t/getlanguages": "^1.1.8",
     "htmlyer": "^1.0.1"
   },
   "devDependencies": {

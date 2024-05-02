@@ -1,6 +1,6 @@
 {
   "name": "@i18n.t/extract",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "extract for i18nt",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
