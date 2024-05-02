@@ -12,12 +12,14 @@
     "pub2": "lerna publish from-package -y",
     "build": "lerna run build",
     "watch": "lerna run watch --",
+    "clean": "rimraf packages/*/*/node_modules && rimraf node_modules",
     "test": "lerna run test --",
     "test-cov": "nyc --reporter=lcov --reporter=text-summary lerna run test",
     "test-build": "lerna run test-build --"
   },
   "devDependencies": {
     "lerna": "^8.1.2",
+    "rimraf": "^1.0.3",
     "nyc": "^15.1.0"
   }
 }
