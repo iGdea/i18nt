@@ -84,8 +84,8 @@ describe('#createI18N', () => {
     it('#witch Common', () => {
       const i18n = createI18N(translateData, DefGetLangsOpts);
 
-      expect(i18n('你好，%s', ['Bacra'], { subkey: 'love' })).to.be('en:HI, Bacra');
-      expect(i18n('你好，%s', 'love')).to.be('en:HI, %s');
+      expect(i18n('你好，%s', ['Bacra'], { subkey: 'love' })).to.be('en:Hi, Bacra');
+      expect(i18n('你好，%s', 'love')).to.be('en:Hi, %s');
       expect(i18n('你好，%s', 'love', { language: 'hk' })).to.be('hk:你好，%s');
     });
 
@@ -94,12 +94,12 @@ describe('#createI18N', () => {
         languages: ['en'],
         subkeys: {
           'love': {
-            '你好，%s': ['en:HI, love Bacra'],
+            '你好，%s': ['en:Hi, love Bacra'],
           },
         },
       }, DefGetLangsOpts);
 
-      expect(i18n('你好，%s', ['Bacra'], { subkey: 'love' })).to.be('en:HI, love Bacra');
+      expect(i18n('你好，%s', ['Bacra'], { subkey: 'love' })).to.be('en:Hi, love Bacra');
     });
   });
 
