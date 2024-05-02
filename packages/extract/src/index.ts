@@ -21,7 +21,17 @@ export function extract({
   const list: WordItem[] = [];
   traverse(sourceFile, list, i18nHandlerName);
 
+  const existsMap: { [key: string]: true } = {};
+
   return {
-    list,
+    list: list.filter(({ text, subkey }) => {
+      const key = `${text}:::(${subkey === undefined ? '' : subkey})`;
+      if (!existsMap[key]) {
+        existsMap[key] = true;
+        return true;
+      }
+
+      return false;
+    }),
   };
 }
