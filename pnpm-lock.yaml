@@ -18,7 +18,7 @@ importers:
   packages/create:
     dependencies:
       '@i18n.t/getlanguages':
-        specifier: ^1.1.6
+        specifier: ^1.1.7
         version: link:../getlanguages
       htmlyer:
         specifier: ^1.0.1
@@ -45,6 +45,25 @@ importers:
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
+
+  packages/extract:
+    dependencies:
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+    devDependencies:
+      '@types/expect.js':
+        specifier: ^0.3.32
+        version: 0.3.32
+      '@types/mocha':
+        specifier: ^10.0.6
+        version: 10.0.6
+      expect.js:
+        specifier: ^0.3.1
+        version: 0.3.1
+      mocha:
+        specifier: ^10.4.0
+        version: 10.4.0
 
   packages/getlanguages:
     devDependencies:
@@ -4746,7 +4765,6 @@ packages:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
 
   /uglify-js@3.17.4:
     resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
