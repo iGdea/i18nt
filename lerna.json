@@ -6,8 +6,8 @@
     "publish": {
       "ignoreChanges": [
         "test/*",
-        "*.md",
-        "packages/i18nc-core/dist/i18nc_core.js"
+        "src/test/*",
+        "*.md"
       ],
       "npmClient": "npm",
       "npmClientArgs": ["--access", "public"]
