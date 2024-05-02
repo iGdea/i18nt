@@ -5,7 +5,9 @@ export const translateData = {
     '下午好': ['en:Good afternoon'],
     '你好，%s': ['en:Hello, %s'],
     '你好，%p': ['en:Hello, %p'],
+    '你好，%{0}': ['en:Hello, %{0}'],
     '你好，%{name}': ['en:Hello, %{name}'],
+    '数字比较正确，%{0} > %{1}': ['en:check num succ, %{1} < %{0}'],
   },
   subkeys: {
     'love': {

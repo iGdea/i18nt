@@ -57,7 +57,7 @@ export function createI18NByInstance<Lang extends string>(instance: I18NInstance
       if (strs.length === 1) {
         return translate(instance, strs[0], {}, undefined, defEncodeKey);
       } else {
-        return translate(instance, strs.join('%s'), {}, args, defEncodeKey);
+        return translate(instance, toTaggedTemplateMsgid(strs), {}, args, defEncodeKey);
       }
     } else {
       const options: I18NOptions<Lang> = strs;
@@ -66,7 +66,7 @@ export function createI18NByInstance<Lang extends string>(instance: I18NInstance
         if (strs.length === 1) {
           return translate(instance, strs[0], options, undefined, defEncodeKey);
         } else {
-          return translate(instance, strs.join('%s'), options, args, defEncodeKey);
+          return translate(instance, toTaggedTemplateMsgid(strs), options, args, defEncodeKey);
         }
       };
       return func;
@@ -74,4 +74,23 @@ export function createI18NByInstance<Lang extends string>(instance: I18NInstance
   }
 
   return i18nt;
+}
+
+/**
+ * 将模版字符串转成必须要的msgid
+ *
+ * 示例：i18n.t`数字：${10},${11},${11}`  提取的key为 `数字：%{0},%{1},%{2}`
+ */
+function toTaggedTemplateMsgid(strs: TemplateStringsArray): string {
+  const result: string[] = [];
+
+  strs.forEach((str, index) => {
+    if (index === 0) {
+      result.push(str);
+    } else {
+      result.push(`%{${index - 1}}${str}`);
+    }
+  });
+
+  return result.join('');
 }

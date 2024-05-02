@@ -144,6 +144,7 @@ describe('#createI18N', () => {
 
       expect(i18n.t`上午好`).to.be('en:Good morning');
       expect(i18n.t`你好，${username}`).to.be('en:Hello, Bacra woo');
+      expect(i18n.t`数字比较正确，${11} > ${10}`).to.be(`en:check num succ, 10 < 11`);
     });
 
     it('#options', () => {
