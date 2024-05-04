@@ -49,6 +49,31 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
 
+  packages/extract:
+    dependencies:
+      '@i18n.t/extract-ts':
+        specifier: ^0.0.0
+        version: link:../extract-ts
+      '@i18n.t/extract-vue':
+        specifier: ^0.0.0
+        version: link:../extract-vue
+    devDependencies:
+      '@types/expect.js':
+        specifier: ^0.3.32
+        version: 0.3.32
+      '@types/mocha':
+        specifier: ^10.0.6
+        version: 10.0.6
+      '@types/node':
+        specifier: ^20.12.8
+        version: 20.12.8
+      expect.js:
+        specifier: ^0.3.1
+        version: 0.3.1
+      mocha:
+        specifier: ^10.4.0
+        version: 10.4.0
+
   packages/extract-ts:
     dependencies:
       typescript:
@@ -71,7 +96,7 @@ importers:
   packages/extract-vue:
     dependencies:
       '@i18n.t/extract-ts':
-        specifier: ^1.1.0
+        specifier: ^0.0.0
         version: link:../extract-ts
       '@vue/compiler-dom':
         specifier: ^3.4.26
@@ -952,6 +977,12 @@ packages:
 
   /@types/node@20.12.7:
     resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: true
+
+  /@types/node@20.12.8:
+    resolution: {integrity: sha512-NU0rJLJnshZWdE/097cdCBbyW1h4hEg0xpovcoAQYHl8dnEyp/NAOiE45pvc+Bd1Dt+2r94v2eGFpQJ4R7g+2w==}
     dependencies:
       undici-types: 5.26.5
     dev: true
