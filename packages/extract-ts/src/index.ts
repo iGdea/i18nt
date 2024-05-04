@@ -12,7 +12,7 @@ export type ExtractResult = {
 };
 
 
-export function extract({
+export function extractTs({
   fileName,
   fileContent,
   i18nHandlerName = 'i18n',
@@ -29,12 +29,12 @@ export function extract({
   traverse(sourceFile, list, i18nHandlerName);
 
   return {
-    list: uniq(list),
+    list: uniqWords(list),
   };
 }
 
 
-export function uniq(list: WordItem[]): WordItem[] {
+export function uniqWords(list: WordItem[]): WordItem[] {
   const existsMap: { [key: string]: true } = {};
 
   return list.filter(({ text, subkey }) => {

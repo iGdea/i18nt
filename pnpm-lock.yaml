@@ -49,7 +49,7 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
 
-  packages/extract:
+  packages/extract-ts:
     dependencies:
       typescript:
         specifier: ^5.4.5
@@ -70,9 +70,9 @@ importers:
 
   packages/extract-vue:
     dependencies:
-      '@i18n.t/extract':
+      '@i18n.t/extract-ts':
         specifier: ^1.1.0
-        version: link:../extract
+        version: link:../extract-ts
       '@vue/compiler-dom':
         specifier: ^3.4.26
         version: 3.4.26

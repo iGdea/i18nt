@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/extract-vue",
   "dependencies": {
-    "@i18n.t/extract": "^1.1.0",
+    "@i18n.t/extract-ts": "^1.1.0",
     "@vue/compiler-dom": "^3.4.26"
   },
   "devDependencies": {

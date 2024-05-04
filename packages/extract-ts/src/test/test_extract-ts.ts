@@ -1,8 +1,8 @@
 import expect from 'expect.js';
 
-import { extract } from '../';
+import { extractTs } from '../';
 
-describe('#extract', () => {
+describe('#extractTs', () => {
   it('#base', () => {
     const fileName = '/root/example.ts';
     const fileContent = `
@@ -21,7 +21,7 @@ describe('#extract', () => {
     i18n.t({ subkey: 'subtype4' })\`i18n.t msg3\`
     `;
 
-    const result = extract({
+    const result = extractTs({
       fileName,
       fileContent,
     });

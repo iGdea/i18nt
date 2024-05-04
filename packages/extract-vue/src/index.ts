@@ -6,11 +6,11 @@ import {
 } from '@vue/compiler-dom';
 
 import {
-  extract,
-  uniq,
+  extractTs,
+  uniqWords,
   type ExtractOptions,
   type ExtractResult,
-} from '@i18n.t/extract';
+} from '@i18n.t/extract-ts';
 
 
 export function extractVue({
@@ -33,7 +33,7 @@ export function extractVue({
 
   function extractItem(node: SimpleExpressionNode | TextNode) {
     if (typeof node.content === 'string') {
-      const { list } = extract({
+      const { list } = extractTs({
         fileName,
         fileContent: node.content,
         i18nHandlerName,
@@ -43,7 +43,7 @@ export function extractVue({
     }
   }
 
-  result.list = uniq(result.list);
+  result.list = uniqWords(result.list);
 
   return result;
 };
