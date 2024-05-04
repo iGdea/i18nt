@@ -1,15 +1,22 @@
 import ts from 'typescript';
 import { traverse, type WordItem } from './lib/traverse';
 
+export type ExtractOptions = {
+  fileName: string,
+  fileContent: string,
+  i18nHandlerName?: string,
+};
+
+export type ExtractResult = {
+  list: WordItem[]
+};
+
+
 export function extract({
   fileName,
   fileContent,
   i18nHandlerName = 'i18n',
-}: {
-  fileName: string,
-  fileContent: string,
-  i18nHandlerName?: string,
-}) {
+}: ExtractOptions): ExtractResult {
   // 创建SourceFile对象
   const sourceFile = ts.createSourceFile(
     fileName,
@@ -21,17 +28,22 @@ export function extract({
   const list: WordItem[] = [];
   traverse(sourceFile, list, i18nHandlerName);
 
+  return {
+    list: uniq(list),
+  };
+}
+
+
+export function uniq(list: WordItem[]): WordItem[] {
   const existsMap: { [key: string]: true } = {};
 
-  return {
-    list: list.filter(({ text, subkey }) => {
-      const key = `${text}:::(${subkey === undefined ? '' : subkey})`;
-      if (!existsMap[key]) {
-        existsMap[key] = true;
-        return true;
-      }
+  return list.filter(({ text, subkey }) => {
+    const key = `${text}:::(${subkey === undefined ? '' : subkey})`;
+    if (!existsMap[key]) {
+      existsMap[key] = true;
+      return true;
+    }
 
-      return false;
-    }),
-  };
+    return false;
+  });
 }

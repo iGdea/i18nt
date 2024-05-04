@@ -1,5 +1,5 @@
 @i18n.t/extract
-==============
+===============
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][npm-url]

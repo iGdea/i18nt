@@ -1,0 +1,40 @@
+{
+  "name": "@i18n.t/extract-vue",
+  "version": "0.0.0",
+  "description": "extract vue for i18nt",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepack": "npx rimraf dist && npm run build --if-present",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "mocha dist/test/test_*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/iGdea/i18nt.git",
+    "directory": "packages/extract-vue"
+  },
+  "keywords": [
+    "i18n",
+    "i18n.t",
+    "extract",
+    "vue"
+  ],
+  "author": "Bacra Woo <bacra.woo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iGdea/i18nt/issues"
+  },
+  "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/extract-vue",
+  "dependencies": {
+    "@i18n.t/extract": "^1.1.0",
+    "@vue/compiler-dom": "^3.4.26"
+  },
+  "devDependencies": {
+    "@types/expect.js": "^0.3.32",
+    "@types/mocha": "^10.0.6",
+    "expect.js": "^0.3.1",
+    "mocha": "^10.4.0"
+  }
+}
