@@ -1,6 +1,6 @@
 {
   "name": "@i18n.t/extract-vue",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "extract vue for i18nt",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/extract-vue",
   "dependencies": {
-    "@i18n.t/extract-ts": "^0.0.0",
+    "@i18n.t/extract-ts": "^1.0.0",
     "@vue/compiler-dom": "^3.4.26"
   },
   "devDependencies": {

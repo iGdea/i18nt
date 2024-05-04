@@ -1,6 +1,6 @@
 {
   "name": "@i18n.t/extract",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "extract ts for i18nt",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,13 +30,13 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/extract",
   "dependencies": {
-    "@i18n.t/extract-ts": "^0.0.0",
-    "@i18n.t/extract-vue": "^0.0.0"
+    "@i18n.t/extract-ts": "^1.0.0",
+    "@i18n.t/extract-vue": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.12.8",
     "@types/expect.js": "^0.3.32",
     "@types/mocha": "^10.0.6",
+    "@types/node": "^20.12.8",
     "expect.js": "^0.3.1",
     "mocha": "^10.4.0"
   }
