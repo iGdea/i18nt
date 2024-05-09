@@ -147,7 +147,6 @@ export function translate<Lang extends string>(
   if (!languages) languages = getLanguages();
 
   let translateMsg: TranslateResult;
-  // @ts-ignore
   if (languages && languages.split) {
     if (cache.language !== languages) {
       if (!langKeys) langKeys = languages.split(',');
@@ -155,24 +154,26 @@ export function translate<Lang extends string>(
       cache.language = languages;
     }
 
-    const languageIndexs: number[] = cache.languageIndexs || [];
-    const subkeyDB = options.subkey && translateData.subkeys?.[options.subkey];
-    const commonDB = translateData.common;
-    if (commonDB) {
-      if (!subkeyDB) {
-        for (let i = languageIndexs.length; !translateMsg && i--;) {
-          translateMsg = commonDB[msg]?.[languageIndexs[i]];
+    const languageIndexs: number[] = cache.languageIndexs;
+    if (languageIndexs && languageIndexs.length) {
+      const subkeyDB = options.subkey && translateData.subkeys?.[options.subkey];
+      const commonDB = translateData.common;
+      if (commonDB) {
+        if (!subkeyDB) {
+          for (let i = languageIndexs.length; !translateMsg && i--;) {
+            translateMsg = commonDB[msg]?.[languageIndexs[i]];
+          }
+        } else {
+          for (let i = languageIndexs.length; !translateMsg && i--;) {
+            const langIndex = languageIndexs[i];
+            translateMsg = subkeyDB[msg]?.[langIndex]
+              || commonDB[msg]?.[langIndex];
+          }
         }
-      } else {
+      } else if (subkeyDB) {
         for (let i = languageIndexs.length; !translateMsg && i--;) {
-          const langIndex = languageIndexs[i];
-          translateMsg = subkeyDB[msg]?.[langIndex]
-            || commonDB[msg]?.[langIndex];
+          translateMsg = subkeyDB[msg]?.[languageIndexs[i]];
         }
-      }
-    } else if (subkeyDB) {
-      for (let i = languageIndexs.length; !translateMsg && i--;) {
-        translateMsg = subkeyDB[msg]?.[languageIndexs[i]];
       }
     }
   }
