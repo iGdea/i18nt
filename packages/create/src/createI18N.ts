@@ -10,18 +10,18 @@ export interface I18NHandler<Lang extends string> extends I18NHandlerEncode<Lang
   urlEncode: I18NHandlerEncode<Lang>;
 }
 
-export type I18NGeneratorOptions = {
-  getLanguages?: GetLanguages,
+export type I18NGeneratorOptions<Lang extends string> = {
+  getLanguages?: GetLanguages<Lang>,
   encoders?: Encoders,
 };
 
 
-export function createI18N<Lang extends string>(translateData: TranslateData, options?: I18NGeneratorOptions): I18NHandler<Lang> {
+export function createI18N<Lang extends string>(translateData: TranslateData<Lang>, options?: I18NGeneratorOptions<Lang>): I18NHandler<Lang> {
   const myEncoders = options?.encoders
     ? { ...encoders, ...options.encoders }
     : encoders;
 
-  const instance: I18NInstance = {
+  const instance: I18NInstance<Lang> = {
     cache: {
       language: '',
       languageIndexs: [],

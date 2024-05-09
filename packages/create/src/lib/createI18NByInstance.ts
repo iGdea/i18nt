@@ -28,7 +28,7 @@ export interface I18NHandlerEncode<Lang extends string> {
 };
 
 
-export function createI18NByInstance<Lang extends string>(instance: I18NInstance, defEncodeKey?: string): I18NHandlerEncode<Lang> {
+export function createI18NByInstance<Lang extends string>(instance: I18NInstance<Lang>, defEncodeKey?: string): I18NHandlerEncode<Lang> {
   const i18nt = <I18NHandlerEncode<Lang>>function (msg: string, arg2: any, arg3: any): string {
     if (!msg) return msg;
     // const [arg2, arg3] = args;

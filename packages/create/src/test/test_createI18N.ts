@@ -3,7 +3,9 @@ import expect from 'expect.js';
 import { translateData } from '../benchmark/lib/translate_data';
 import { createI18N } from '../';
 
-const DefGetLangsOpts = {
+const DefGetLangsOpts: {
+  getLanguages: () => 'en' | 'hk',
+} = {
   getLanguages: () => 'en',
 };
 
@@ -105,7 +107,7 @@ describe('#createI18N', () => {
 
   describe('#options', () => {
     it('#language', () => {
-      const i18n = createI18N<'en' | 'cn'>(translateData, DefGetLangsOpts);
+      const i18n = createI18N<'en' | 'cn' | 'hk'>(translateData, DefGetLangsOpts);
 
       expect(i18n('你好，%s', ['Bacra'], { language: 'cn' })).to.be('你好，Bacra');
       expect(i18n('你好，%s', ['Bacra'], { language: ['en', 'cn'] })).to.be('en:Hello, Bacra');

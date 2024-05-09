@@ -1,5 +1,5 @@
 export const translateData = {
-  languages: ['en', 'hk'],
+  languages: ['en', 'hk'] as ('en' | 'hk')[],
   common: {
     '上午好': ['en:Good morning', 'hk:早安'],
     '下午好': ['en:Good afternoon'],

@@ -3,7 +3,7 @@ import type { Encoders, Encoder } from './encoders';
 
 const MSG_REP_REG = /(%\{(.+?)\}|%s|%p)/g;
 
-type DBLanguages = string[];
+type DBLanguages<Lang extends string> = Lang[];
 type TranslateResult = string | undefined | null;
 type TranslateSubData = {
   /**
@@ -33,11 +33,11 @@ type TranslateSubData = {
  * }
  * ```
  */
-export type TranslateData = {
+export type TranslateData<Lang extends string> = {
   /**
    * 语言列表
    */
-  languages: DBLanguages,
+  languages: DBLanguages<Lang>,
 
   /**
    * 保存通用的翻译词条
@@ -100,10 +100,10 @@ export interface I18NFullOptions<Lang extends string> extends I18NOptions<Lang> 
 };
 
 
-export type I18NInstance = {
+export type I18NInstance<Lang extends string> = {
   cache: TranslateCache,
-  translateData: TranslateData,
-  getLanguages: GetLanguages,
+  translateData: TranslateData<Lang>,
+  getLanguages: GetLanguages<Lang>,
   encoders: Encoders,
 };
 
@@ -112,7 +112,7 @@ export type I18NInstance = {
  * 翻译并组装字符串模版
  */
 export function translate<Lang extends string>(
-  { translateData, cache, getLanguages, encoders }: I18NInstance,
+  { translateData, cache, getLanguages, encoders }: I18NInstance<Lang>,
 
   msg: string,
   options: I18NOptions<Lang>,
@@ -150,7 +150,7 @@ export function translate<Lang extends string>(
   if (languages && languages.split) {
     if (cache.language !== languages) {
       if (!langKeys) langKeys = languages.split(',');
-      cache.languageIndexs = languages2index(translateData.languages || [], langKeys);
+      cache.languageIndexs = languages2index<Lang>(translateData.languages || [], langKeys);
       cache.language = languages;
     }
 
@@ -241,7 +241,10 @@ function renderMsg(msg: string, tpldata: FullTypeData, defEncode?: Encoder): str
 /**
  * 将语言列表转换成翻译词典languages数组中的index列表
  */
-function languages2index(dblanguages: DBLanguages, langKeys: string[]): number[] {
+function languages2index<Lang extends string>(
+  dblanguages: DBLanguages<Lang>,
+  langKeys: string[],
+): number[] {
   const dblanguagesMap = {} as { [lang: string]: number };
   const languageIndexs = [] as number[];
 
