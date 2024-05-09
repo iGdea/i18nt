@@ -111,7 +111,15 @@ describe('#createI18N', () => {
 
       expect(i18n('你好，%s', ['Bacra'], { language: 'cn' })).to.be('你好，Bacra');
       expect(i18n('你好，%s', ['Bacra'], { language: ['en', 'cn'] })).to.be('en:Hello, Bacra');
-      // expect(i18n('你好，%s', ['Bacra'], { language: 'hk' })).to.be('en:Hello, Bacra');
+
+      // 翻译语言优先级
+      expect(i18n('上午好', { language: ['hk', 'en'] })).to.be('hk:早安');
+      expect(i18n('上午好', { language: ['en', 'hk'] })).to.be('en:Good morning');
+      expect(i18n('上午好', { language: ['cn', 'en', 'hk'] })).to.be('en:Good morning');
+
+      // 语言不在配置的列表里面，ts预期报错
+      // @ts-expect-error
+      expect(i18n('你好，%s', ['Bacra'], { language: 'ja' })).to.be('你好，Bacra');
     });
 
     it('#forceMatch', () => {
