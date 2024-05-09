@@ -156,23 +156,22 @@ export function translate<Lang extends string>(
 
     const languageIndexs: number[] = cache.languageIndexs;
     if (languageIndexs && languageIndexs.length) {
-      const subkeyDB = options.subkey && translateData.subkeys?.[options.subkey];
-      const commonDB = translateData.common;
+      const subkeyDB = options.subkey && translateData.subkeys?.[options.subkey]?.[msg];
+      const commonDB = translateData.common?.[msg];
       if (commonDB) {
         if (!subkeyDB) {
           for (let i = languageIndexs.length; !translateMsg && i--;) {
-            translateMsg = commonDB[msg]?.[languageIndexs[i]];
+            translateMsg = commonDB[languageIndexs[i]];
           }
         } else {
           for (let i = languageIndexs.length; !translateMsg && i--;) {
             const langIndex = languageIndexs[i];
-            translateMsg = subkeyDB[msg]?.[langIndex]
-              || commonDB[msg]?.[langIndex];
+            translateMsg = subkeyDB[langIndex] || commonDB[langIndex];
           }
         }
       } else if (subkeyDB) {
         for (let i = languageIndexs.length; !translateMsg && i--;) {
-          translateMsg = subkeyDB[msg]?.[languageIndexs[i]];
+          translateMsg = subkeyDB[languageIndexs[i]];
         }
       }
     }
