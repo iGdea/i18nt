@@ -52,7 +52,13 @@ export type TranslateData<Lang extends string> = {
   },
 };
 
-type TranslateCache = {
+type TranslateCache<Lang extends string> = {
+  // TranslateData中的语言数组，对应的map
+  // 注意：dblanguage2indexKey是数组引用的判断，所以TranslateData如果要修改值，必须直接赋值
+  dblanguage2indexKey: Lang[],
+  dblanguage2indexMap: { [key in Lang]?: number },
+
+  // 每次传入的语言，对应的index列表
   language: string,
   languageIndexs: number[],
 };
@@ -101,7 +107,7 @@ export interface I18NFullOptions<Lang extends string> extends I18NOptions<Lang> 
 
 
 export type I18NInstance<Lang extends string> = {
-  cache: TranslateCache,
+  cache: TranslateCache<Lang>,
   translateData: TranslateData<Lang>,
   getLanguages: GetLanguages<Lang>,
   encoders: Encoders,
@@ -150,7 +156,26 @@ export function translate<Lang extends string>(
   if (languages && languages.split) {
     if (cache.language !== languages) {
       if (!langKeys) langKeys = languages.split(',');
-      cache.languageIndexs = languages2index<Lang>(translateData.languages || [], langKeys);
+
+      // translateData中的语言，转成index Map
+      let dblanguage2indexMap = cache.dblanguage2indexMap;
+      if (cache.dblanguage2indexKey !== translateData.languages) {
+        dblanguage2indexMap = {};
+        const dblanguages = translateData.languages;
+        if (dblanguages) {
+          for (let i = dblanguages.length; i--;) dblanguage2indexMap[dblanguages[i]] = i;
+        }
+        cache.dblanguage2indexMap = dblanguage2indexMap;
+        cache.dblanguage2indexKey = dblanguages;
+      }
+
+      // 将语言列表转换成翻译词典languages数组中的index列表
+      const languageIndexs: number[] = [];
+      for (let i = langKeys.length; i--;) {
+        const langIndex = dblanguage2indexMap[langKeys[i] as Lang];
+        if (langIndex || langIndex === 0) languageIndexs.push(langIndex);
+      }
+      cache.languageIndexs = languageIndexs;
       cache.language = languages;
     }
 
@@ -236,26 +261,6 @@ function renderMsg(msg: string, tpldata: FullTypeData, defEncode?: Encoder): str
   }
 
   return msgResult.join('');
-}
-
-/**
- * 将语言列表转换成翻译词典languages数组中的index列表
- */
-function languages2index<Lang extends string>(
-  dblanguages: DBLanguages<Lang>,
-  langKeys: string[],
-): number[] {
-  const dblanguagesMap = {} as { [lang: string]: number };
-  const languageIndexs = [] as number[];
-
-  for (let i = dblanguages.length; i--;) dblanguagesMap[dblanguages[i]] = i;
-
-  for (let i = langKeys.length; i--;) {
-    const langIndex = dblanguagesMap[langKeys[i]];
-    if (langIndex || langIndex === 0) languageIndexs.push(langIndex);
-  }
-
-  return languageIndexs;
 }
 
 

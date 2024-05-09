@@ -25,6 +25,9 @@ export function createI18N<Lang extends string>(translateData: TranslateData<Lan
     cache: {
       language: '',
       languageIndexs: [],
+
+      dblanguage2indexKey: [],
+      dblanguage2indexMap: {},
     },
     translateData,
 
