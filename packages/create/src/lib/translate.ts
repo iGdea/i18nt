@@ -171,7 +171,7 @@ export function translate<Lang extends string>(
 
       // 将语言列表转换成翻译词典languages数组中的index列表
       const languageIndexs: number[] = [];
-      for (let i = langKeys.length; i--;) {
+      for (let len = langKeys.length, i = 0; i < len; i++) {
         const langIndex = dblanguage2indexMap[langKeys[i] as Lang];
         if (langIndex || langIndex === 0) languageIndexs.push(langIndex);
       }
@@ -180,22 +180,23 @@ export function translate<Lang extends string>(
     }
 
     const languageIndexs: number[] = cache.languageIndexs;
+    const languageIndexsLength = languageIndexs.length;
     if (languageIndexs && languageIndexs.length) {
       const subkeyDB = options.subkey && translateData.subkeys?.[options.subkey]?.[msg];
       const commonDB = translateData.common?.[msg];
       if (commonDB) {
         if (!subkeyDB) {
-          for (let i = languageIndexs.length; !translateMsg && i--;) {
+          for (let i = 0; !translateMsg && i < languageIndexsLength; i++) {
             translateMsg = commonDB[languageIndexs[i]];
           }
         } else {
-          for (let i = languageIndexs.length; !translateMsg && i--;) {
+          for (let i = 0; !translateMsg && i < languageIndexsLength; i++) {
             const langIndex = languageIndexs[i];
             translateMsg = subkeyDB[langIndex] || commonDB[langIndex];
           }
         }
       } else if (subkeyDB) {
-        for (let i = languageIndexs.length; !translateMsg && i--;) {
+        for (let i = 0; !translateMsg && i < languageIndexsLength; i++) {
           translateMsg = subkeyDB[languageIndexs[i]];
         }
       }
