@@ -109,7 +109,7 @@ export interface I18NFullOptions<Lang extends string> extends I18NOptions<Lang> 
 export type I18NInstance<Lang extends string> = {
   cache: TranslateCache<Lang>,
   translateData: TranslateData<Lang>,
-  getLanguages: GetLanguages<Lang>,
+  getLanguages: GetLanguages,
   encoders: Encoders,
 };
 
