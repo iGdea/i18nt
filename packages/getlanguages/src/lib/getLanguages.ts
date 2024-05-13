@@ -7,7 +7,7 @@
 import {
   getLanguagesFromCookie,
   genCookieRegExp,
-} from './cookie-utils';
+} from './cookieUtils';
 
 type GetLanguagesByKey = (key: string) => string;
 

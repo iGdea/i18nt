@@ -5,7 +5,7 @@
 import {
   getLanguagesFromCookie,
   genCookieRegExp,
-} from './cookie-utils';
+} from './cookieUtils';
 
 import type { ClientRequest } from 'http';
 
