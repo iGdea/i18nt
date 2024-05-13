@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/create",
   "dependencies": {
-    "@i18n.t/getlanguages": "^1.1.8",
+    "@i18n.t/getlanguages": "workspace:^",
     "htmlyer": "^1.0.1"
   },
   "devDependencies": {

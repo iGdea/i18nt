@@ -34,8 +34,8 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/extract",
   "dependencies": {
-    "@i18n.t/extract-ts": "^1.0.0",
-    "@i18n.t/extract-vue": "^1.0.0"
+    "@i18n.t/extract-ts": "workspace:^",
+    "@i18n.t/extract-vue": "workspace:^"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

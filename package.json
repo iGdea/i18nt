@@ -18,8 +18,9 @@
     "test-build": "lerna run test-build --"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "lerna": "^8.1.2",
-    "rimraf": "^1.0.3",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "rimraf": "^1.0.3"
   }
 }
