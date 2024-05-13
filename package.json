@@ -1,25 +1,22 @@
 {
   "name": "root",
   "private": true,
-  "packageManager": "pnpm@8.6.11",
+  "packageManager": "pnpm@9.1.1",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "lint": "eslint .",
-    "ls": "lerna ls",
-    "pub": "lerna version",
-    "pub2": "lerna publish from-package -y",
-    "build": "lerna run build",
-    "watch": "lerna run watch --",
+    "build": "nx run-many --target=build",
     "clean": "rimraf packages/*/*/node_modules && rimraf node_modules",
-    "test": "lerna run test --",
-    "test-cov": "nyc --reporter=lcov --reporter=text-summary lerna run test",
-    "test-build": "lerna run test-build --"
+    "test": "nx run-many --target=test",
+    "test-cov": "nyc --reporter=lcov --reporter=text-summary nx run-many --target=test --skipNxCache"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "lerna": "^8.1.2",
+    "@nx/jest": "19.0.3",
+    "jest": "^29.4.1",
+    "nx": "19.0.3",
     "nyc": "^15.1.0",
     "rimraf": "^1.0.3"
   }

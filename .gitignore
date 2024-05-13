@@ -11,3 +11,5 @@ packages/**/package-lock.json
 .history
 .nyc_output
 dist
+
+.nx/cache

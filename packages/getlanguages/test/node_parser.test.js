@@ -1,5 +1,5 @@
 const { describe, it, expect } = require('@jest/globals');
-const { parseNodeAcceptLanguage, genParser } = require('../dist/lib/node-parser');
+const { parseNodeAcceptLanguage, genParser } = require('../dist/lib/nodeParser');
 
 describe('#nodeParser', () => {
   const req = {
