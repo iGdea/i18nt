@@ -25,6 +25,9 @@
   ],
   "author": "Bacra Woo <bacra.woo@gmail.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/iGdea/i18nt/issues"
   },
