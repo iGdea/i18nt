@@ -1,5 +1,12 @@
 # @i18n.t/create
 
+## 1.6.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @i18n.t/getlanguages@1.1.10
+
 ## 1.6.2
 
 ### Patch Changes
