@@ -11,14 +11,13 @@
     "bench": "nx run-many --target=bench --output-style=stream",
     "clean": "rimraf packages/*/*/node_modules && rimraf node_modules",
     "test": "nx run-many --target=test",
-    "test-cov": "nyc --reporter=lcov --reporter=text-summary nx run-many --target=test --skipNxCache"
+    "test-cov": "nx run-many --target=test --skipNxCache -- --coverage"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
     "@nx/jest": "19.0.3",
     "jest": "^29.4.1",
     "nx": "19.0.3",
-    "nyc": "^15.1.0",
     "rimraf": "^1.0.3"
   }
 }

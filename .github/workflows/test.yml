@@ -25,9 +25,9 @@ jobs:
       - run: npm test
 
       # 覆盖率上报
-      - run: npm run test-cov --if-present
+      # - run: npm run test-cov --if-present
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
+      # - name: Coveralls
+      #   uses: coverallsapp/github-action@master
+      #   with:
+      #     github-token: ${{ secrets.github_token }}
