@@ -1,7 +1,7 @@
 .*
 src
-dist/test
-dist/benchmark
+test
+benchmark
 coverage
 
 tsconfig.tsbuildinfo

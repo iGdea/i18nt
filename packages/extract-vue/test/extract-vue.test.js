@@ -1,6 +1,5 @@
-import expect from 'expect.js';
-
-import { extractVue } from '../';
+const { describe, it, expect } = require('@jest/globals');
+const { extractVue } = require('../');
 
 describe('#extract', () => {
   it('#base', () => {
@@ -31,20 +30,6 @@ describe('#extract', () => {
       fileName,
       fileContent,
     });
-    expect(result).to.eql({
-      list: [
-        { text: 'i18n text1', subkey: undefined },
-        { text: 'i18n text2', subkey: 'subkey1' },
-        { text: 'i18n.t text3', subkey: 'subkey2' },
-        { text: 'i18n arr1', subkey: undefined },
-        { text: 'i18n arr2', subkey: 'subkey1' },
-        { text: 'i18n.t arr3', subkey: 'subkey2' },
-        { text: 'i18n script1', subkey: undefined },
-        { text: 'i18n script2', subkey: 'subkey1' },
-        { text: 'i18n script3', subkey: 'subkey2' },
-        { text: 'jsEncode script4', subkey: undefined },
-        { text: 'sub i18n', subkey: undefined },
-      ]
-    });
+    expect(result).toMatchSnapshot();
   });
 });

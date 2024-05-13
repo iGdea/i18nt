@@ -1,11 +1,9 @@
-import expect from 'expect.js';
-
-import type { ClientRequest } from 'http';
-import { parseNodeAcceptLanguage, genParser } from '../lib/node-parser';
+const { describe, it, expect } = require('@jest/globals');
+const { parseNodeAcceptLanguage, genParser } = require('../dist/lib/node-parser');
 
 describe('#nodeParser', () => {
-  const req = <ClientRequest>{
-    getHeader(type: string) {
+  const req = {
+    getHeader(type) {
       type = type.toLowerCase();
       if (type === 'accept-language') {
         return 'zh,en;q=0.9,zh-CN;q=0.8';
@@ -16,10 +14,10 @@ describe('#nodeParser', () => {
   };
 
   it('#parseNodeAcceptLanguage', () => {
-    expect(parseNodeAcceptLanguage(req)).to.be('zh,en,zh_cn');
+    expect(parseNodeAcceptLanguage(req)).toBe('zh,en,zh_cn');
   });
 
   it('#parseNodeCookie', () => {
-    expect(genParser.genParseNodeCookie('__i18nt__')(req)).to.be('zh,zh_hk,en');
+    expect(genParser.genParseNodeCookie('__i18nt__')(req)).toBe('zh,zh_hk,en');
   });
 });

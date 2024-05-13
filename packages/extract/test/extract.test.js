@@ -1,6 +1,5 @@
-import expect from 'expect.js';
-
-import { extract } from '../';
+const { describe, it, expect } = require('@jest/globals');
+const { extract } = require('../');
 
 describe('#extract', () => {
   it('#ts', () => {
@@ -11,12 +10,8 @@ describe('#extract', () => {
       i18n('i18n text', 'subkey1');
       `,
     });
-    expect(result).to.eql({
-      list: [
-        { text: 'i18n text', subkey: undefined },
-        { text: 'i18n text', subkey: 'subkey1' },
-      ]
-    });
+
+    expect(result).toMatchSnapshot();
   });
 
 
@@ -35,13 +30,7 @@ describe('#extract', () => {
       </script>
       `,
     });
-    expect(result).to.eql({
-      list: [
-        { text: 'i18n text', subkey: undefined },
-        { text: 'i18n attr', subkey: undefined },
-        { text: 'i18n script', subkey: undefined },
-        { text: 'i18n script', subkey: 'subkey1' },
-      ]
-    });
+
+    expect(result).toMatchSnapshot();
   });
 });

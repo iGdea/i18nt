@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#extract #ts 1`] = `
+{
+  "list": [
+    {
+      "subkey": undefined,
+      "text": "i18n text",
+    },
+    {
+      "subkey": "subkey1",
+      "text": "i18n text",
+    },
+  ],
+}
+`;
+
+exports[`#extract #vue 1`] = `
+{
+  "list": [
+    {
+      "subkey": undefined,
+      "text": "i18n text",
+    },
+    {
+      "subkey": undefined,
+      "text": "i18n attr",
+    },
+    {
+      "subkey": undefined,
+      "text": "i18n script",
+    },
+    {
+      "subkey": "subkey1",
+      "text": "i18n script",
+    },
+  ],
+}
+`;

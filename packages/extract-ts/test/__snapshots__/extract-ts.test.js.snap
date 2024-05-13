@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#extractTs #base 1`] = `
+{
+  "list": [
+    {
+      "subkey": undefined,
+      "text": "i18n text",
+    },
+    {
+      "subkey": "subkey1",
+      "text": "i18n text",
+    },
+    {
+      "subkey": "subkey2",
+      "text": "i18n text",
+    },
+    {
+      "subkey": "subkey3",
+      "text": "i18n text",
+    },
+    {
+      "subkey": undefined,
+      "text": "jsEncode text",
+    },
+    {
+      "subkey": undefined,
+      "text": "sub i18n",
+    },
+    {
+      "text": "i18n.t msg1",
+    },
+    {
+      "text": "i18n.t msg2 %{0}@%{1}",
+    },
+    {
+      "subkey": "subkey4",
+      "text": "i18n.t msg3",
+    },
+  ],
+}
+`;
