@@ -1,9 +1,9 @@
-const { describe, it, expect } = require("@jest/globals");
-const { extractTs } = require("../");
+const { describe, it, expect } = require('@jest/globals');
+const { extractTs } = require('../');
 
-describe("#extractTs", () => {
-  it("#base", () => {
-    const fileName = "/root/example.ts";
+describe('#extractTs', () => {
+  it('#base', () => {
+    const fileName = '/root/example.ts';
     const fileContent = `
     i18n('i18n text');
     i18n('i18n text');

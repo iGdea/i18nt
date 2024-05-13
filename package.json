@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "eslint .",
     "build": "nx run-many --target=build",
+    "bench": "nx run-many --target=bench --output-style=stream",
     "clean": "rimraf packages/*/*/node_modules && rimraf node_modules",
     "test": "nx run-many --target=test",
     "test-cov": "nyc --reporter=lcov --reporter=text-summary nx run-many --target=test --skipNxCache"
