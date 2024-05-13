@@ -24,7 +24,7 @@ importers:
   packages/create:
     dependencies:
       '@i18n.t/getlanguages':
-        specifier: ^1.1.8
+        specifier: workspace:^
         version: link:../getlanguages
       htmlyer:
         specifier: ^1.0.1
@@ -55,10 +55,10 @@ importers:
   packages/extract:
     dependencies:
       '@i18n.t/extract-ts':
-        specifier: ^1.0.0
+        specifier: workspace:^
         version: link:../extract-ts
       '@i18n.t/extract-vue':
-        specifier: ^1.0.0
+        specifier: workspace:^
         version: link:../extract-vue
     devDependencies:
       '@jest/globals':
@@ -84,7 +84,7 @@ importers:
   packages/extract-vue:
     dependencies:
       '@i18n.t/extract-ts':
-        specifier: ^1.0.0
+        specifier: ^1.0.1
         version: link:../extract-ts
       '@vue/compiler-dom':
         specifier: ^3.4.26
