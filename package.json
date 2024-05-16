@@ -8,10 +8,11 @@
   "scripts": {
     "lint": "eslint .",
     "build": "nx run-many --target=build",
+    "watch": "nx run-many --target=watch --parallel=999",
     "bench": "nx run-many --target=bench --output-style=stream",
     "clean": "rimraf packages/*/*/node_modules && rimraf node_modules",
     "test": "nx run-many --target=test",
-    "test-cov": "nx run-many --target=test --skipNxCache -- --coverage"
+    "test-cov": "nx run-many --target=test --skip-nx-cache -- --coverage"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
