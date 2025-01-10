@@ -1,6 +1,6 @@
 {
   "name": "@i18n.t/create",
-  "version": "1.6.4",
+  "version": "1.7.0",
   "description": "create i18n handler",
   "main": "dist/index.js",
   "browser": "browser_dist/index.js",

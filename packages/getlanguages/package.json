@@ -1,6 +1,6 @@
 {
   "name": "@i18n.t/getlanguages",
-  "version": "1.1.11",
+  "version": "1.2.0",
   "description": "Get languages of i18nt",
   "main": "dist/index.js",
   "browser": "browser_dist/index.js",
