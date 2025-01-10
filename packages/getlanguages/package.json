@@ -3,13 +3,16 @@
   "version": "1.1.11",
   "description": "Get languages of i18nt",
   "main": "dist/index.js",
+  "browser": "browser_dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepack": "npx rimraf dist && npm run build --if-present",
-    "build": "tsc",
-    "watch": "tsc --watch",
+    "prepack": "npx rimraf dist browser_dist && npm run build --if-present",
+    "build": "npx tsc && npm run build:babel",
+    "build:babel": "npx babel dist --out-dir browser_dist",
+    "watch": "npx tsc --watch",
+    "watch:all": "npx tsc --watch & npm run build:babel -- --watch",
     "pretest": "npm run build",
-    "test": "jest"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -31,9 +34,6 @@
   },
   "homepage": "https://github.com/iGdea/i18nt/tree/master/packages/getlanguages",
   "devDependencies": {
-    "@types/node": "^20.12.7",
-    "@jest/globals": "^29.7.0",
-    "jest": "^29.7.0",
-    "typescript": "^5.4.5"
+    "@types/node": "^20.12.7"
   }
 }

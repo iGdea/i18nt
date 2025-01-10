@@ -3,14 +3,17 @@
   "version": "1.6.4",
   "description": "create i18n handler",
   "main": "dist/index.js",
+  "browser": "browser_dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepack": "npx rimraf dist && npm run build --if-present",
-    "build": "tsc",
-    "watch": "tsc --watch",
+    "prepack": "npx rimraf dist browser_dist && npm run build --if-present",
+    "build": "npx tsc && npm run build:babel",
+    "build:babel": "npx babel dist --out-dir browser_dist",
+    "watch": "npx --watch",
+    "watch:all": "npx tsc --watch & npm run build:babel -- --watch",
     "bench": "for i in dist/benchmark/*.js; do echo $i; node $i; done",
     "pretest": "npm run build",
-    "test": "jest dist/test/*.test.js"
+    "test": "npx jest dist/test/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -37,9 +40,6 @@
   },
   "devDependencies": {
     "@types/benchmark": "^2.1.5",
-    "@jest/globals": "^29.7.0",
-    "jest": "^29.7.0",
-    "benchmark": "^2.1.4",
-    "typescript": "^5.4.5"
+    "benchmark": "^2.1.4"
   }
 }
